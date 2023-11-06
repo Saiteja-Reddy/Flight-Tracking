@@ -4,8 +4,11 @@
 
 #include "DatabaseClient.h"
 
-void DatabaseClient::onEvent(int num) {
-    std::cout << "Received Event " << num << std::endl;
-}
 
 DatabaseClient::DatabaseClient() = default;
+
+int DatabaseClient::processEvent(int i) {
+    std::cout << "Received database event " << i << std::endl;
+    if (i == -1)
+        return -1;
+}

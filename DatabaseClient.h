@@ -11,7 +11,8 @@
 class DatabaseClient : public Observer {
 public:
     DatabaseClient();
-    void onEvent(int num) override;
+
+    int processEvent(int i) override;
 };
 
 

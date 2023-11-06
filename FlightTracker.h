@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <iostream>
 #include "Observable.h"
 
 class FlightTracker : public Observable {
@@ -20,7 +21,20 @@ public:
 
     void removeObserver(std::shared_ptr<Observer> observer) override;
 
-    void notifyObservers() override;
+    void notifyObservers(int i) override;
+
+    void start() {
+        while(true) {
+            int i;
+            std::cin >> i;
+            std::cout << "Received evt " << i << std::endl;
+            notifyObservers(i);
+            if(i == -1) {
+                std::cout << "Ending program!" << std::endl;
+                break;
+            }
+        }
+    }
 };
 
 

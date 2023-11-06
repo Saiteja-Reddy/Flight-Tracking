@@ -15,8 +15,8 @@ void FlightTracker::removeObserver(std::shared_ptr<Observer> observer) {
     }
 }
 
-void FlightTracker::notifyObservers() {
+void FlightTracker::notifyObservers(int i) {
     for(auto& observer: observers) {
-        observer->onEvent(1);
+        observer->onEvent(i);
     }
 }
