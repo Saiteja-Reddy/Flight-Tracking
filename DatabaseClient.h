@@ -7,12 +7,28 @@
 
 #include <iostream>
 #include "Observer.h"
+#include "SQLiteCpp/Database.h"
+#include "SQLiteCpp/VariadicBind.h"
 
 class DatabaseClient : public Observer {
 public:
-    DatabaseClient();
+    DatabaseClient() :
+            db{SQLite::Database("example.db3",
+                                SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE)} {
+
+        // Create a new table with an explicit "id" column aliasing the underlying rowid
+        db.exec("DROP TABLE IF EXISTS test");
+        db.exec("CREATE TABLE test (id INTEGER PRIMARY KEY, value TEXT)");
+    };
 
     int processEvent(int i) override;
+
+    void updateDB(int num);
+
+private:
+    // Open a database file
+    SQLite::Database db;
+
 };
 
 

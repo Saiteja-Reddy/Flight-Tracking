@@ -3,8 +3,15 @@
 #include "DatabaseClient.h"
 #include "UIClient.h"
 
+void database() {
+    auto dc = std::make_shared<DatabaseClient>();
+    dc->updateDB(42);
+}
+
 int main() {
     std::cout << "Hello World!" << std::endl;
+
+//    database();
 
     FlightTracker ft;
     auto dc = std::make_shared<DatabaseClient>();
