@@ -24,12 +24,19 @@ public:
     void notifyObservers(int i) override;
 
     void start() {
-        while(true) {
+            thread_ = std::thread(&FlightTracker::_main_loop, this);
+    }
+
+private:
+    std::thread thread_;
+
+    void _main_loop() {
+        while (true) {
             int i;
             std::cin >> i;
             std::cout << "Received evt " << i << std::endl;
             notifyObservers(i);
-            if(i == -1) {
+            if (i == -1) {
                 std::cout << "Ending program!" << std::endl;
                 break;
             }
