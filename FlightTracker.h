@@ -17,9 +17,9 @@ private:
 
 public:
 
-    void registerObserver(std::shared_ptr<Observer> observer) override;
+    void registerObserver(const std::shared_ptr<Observer>& observer) override;
 
-    void removeObserver(std::shared_ptr<Observer> observer) override;
+    void removeObserver(const std::shared_ptr<Observer>& observer) override;
 
     void notifyObservers(int i) override;
 

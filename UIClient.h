@@ -6,9 +6,9 @@
 #define FLIGHT_TRACK_UICLIENT_H
 
 #include <iostream>
-#include "Observer.h"
+#include "SeparateThreadObserver.h"
 
-class UIClient : public Observer {
+class UIClient : public SeparateThreadObserver {
 public:
     UIClient();
 

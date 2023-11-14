@@ -6,11 +6,11 @@
 #define FLIGHT_TRACK_DATABASECLIENT_H
 
 #include <iostream>
-#include "Observer.h"
+#include "SeparateThreadObserver.h"
 #include "SQLiteCpp/Database.h"
 #include "SQLiteCpp/VariadicBind.h"
 
-class DatabaseClient : public Observer {
+class DatabaseClient : public SeparateThreadObserver {
 public:
     DatabaseClient() :
             db{SQLite::Database("example.db3",
