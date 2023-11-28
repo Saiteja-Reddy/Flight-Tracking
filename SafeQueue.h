@@ -18,7 +18,7 @@ public:
     ~SafeQueue() = default;
 
     // Add an element to the queue.
-    void enqueue(T t) {
+    void enqueue(const T& t) {
         std::lock_guard<std::mutex> lock(m);
         q.push(t);
         cv.notify_one();
@@ -26,6 +26,7 @@ public:
 
     // Get the "front"-element.
     // If the queue is empty, wait till a element is available.
+    // TODO: memory check? std::move??
     T dequeue() {
         std::unique_lock<std::mutex> lock(m);
         while (q.empty()) {

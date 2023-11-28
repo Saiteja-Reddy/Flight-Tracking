@@ -7,12 +7,13 @@
 
 #include <iostream>
 #include "SeparateThreadObserver.h"
+#include "FlightStatusEvent.h"
 
-class UIClient : public SeparateThreadObserver {
+class UIClient : public SeparateThreadObserver<FlightStatusEvent> {
 public:
     UIClient();
 
-    int processEvent(int i) override;
+    int processEvent(const FlightStatusEvent& event) override;
 };
 
 

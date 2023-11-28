@@ -9,8 +9,9 @@
 #include "SeparateThreadObserver.h"
 #include "SQLiteCpp/Database.h"
 #include "SQLiteCpp/VariadicBind.h"
+#include "FlightStatusEvent.h"
 
-class DatabaseClient : public SeparateThreadObserver {
+class DatabaseClient : public SeparateThreadObserver<FlightStatusEvent> {
 public:
     DatabaseClient() :
             db{SQLite::Database("example.db3",
@@ -21,7 +22,7 @@ public:
         db.exec("CREATE TABLE test (id INTEGER PRIMARY KEY, value TEXT)");
     };
 
-    int processEvent(int i) override;
+    int processEvent(const FlightStatusEvent& event) override;
 
     void updateDB(int num);
 

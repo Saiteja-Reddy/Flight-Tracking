@@ -5,9 +5,10 @@
 #ifndef FLIGHT_TRACK_OBSERVER_H
 #define FLIGHT_TRACK_OBSERVER_H
 
+template<class T>
 class Observer {
 public:
-    virtual void onEvent(int num) = 0;
+    virtual void onEvent(const T& event) = 0;
 };
 
 

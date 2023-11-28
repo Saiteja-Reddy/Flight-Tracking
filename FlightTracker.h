@@ -9,22 +9,29 @@
 #include <vector>
 #include <iostream>
 #include "Observable.h"
+#include "FlightStatusEvent.h"
+#include<unistd.h>
 
-class FlightTracker : public Observable {
+using FlightObserver = Observer<FlightStatusEvent>;
+class FlightTracker : public Observable<FlightStatusEvent> {
 private:
 
-    std::vector<std::shared_ptr<Observer>> observers;
+    std::vector<std::shared_ptr<FlightObserver>> observers;
 
 public:
 
-    void registerObserver(const std::shared_ptr<Observer>& observer) override;
+    void registerObserver(const std::shared_ptr<FlightObserver>& observer) override;
 
-    void removeObserver(const std::shared_ptr<Observer>& observer) override;
+    void removeObserver(const std::shared_ptr<FlightObserver>& observer) override;
 
-    void notifyObservers(int i) override;
+    void notifyObservers(const FlightStatusEvent& event) override;
 
     void start() {
             thread_ = std::thread(&FlightTracker::_main_loop, this);
+    }
+
+    static void stop() {
+        std::terminate();
     }
 
 private:
@@ -32,11 +39,11 @@ private:
 
     void _main_loop() {
         while (true) {
-            int i;
-            std::cin >> i;
-            std::cout << "Received evt " << i << std::endl;
+            sleep(1);
+            auto i = FlightStatusEvent(rand() % 1000);
+            std::cout << "Received evt " << i.getNum() << std::endl;
             notifyObservers(i);
-            if (i == -1) {
+            if (i.getNum() == -1) {
                 std::cout << "Ending program!" << std::endl;
                 break;
             }

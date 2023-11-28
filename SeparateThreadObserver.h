@@ -10,17 +10,18 @@
 #include "SafeQueue.h"
 #include "Observer.h"
 
-class SeparateThreadObserver : public Observer {
+template<class T>
+class SeparateThreadObserver : public Observer<T> {
 public:
-    void onEvent(int num) override {
-        eventQueue.enqueue(num);
+    void onEvent(const T& event) override {
+        eventQueue.enqueue(event);
     };
 
     void start() {
         thread_ = std::thread(&SeparateThreadObserver::_event_loop, this);
     };
 
-    virtual int processEvent(int i) = 0;
+    virtual int processEvent(const T& event) = 0;
 
     void stop() {
         eventQueue.enqueue(-1);
@@ -30,12 +31,12 @@ public:
     virtual ~SeparateThreadObserver() = default;;
 
 private:
-    SafeQueue<int> eventQueue;
+    SafeQueue<T> eventQueue;
     std::thread thread_;
 
     void _event_loop() {
         while (true) {
-            int evt = eventQueue.dequeue();
+            auto evt = eventQueue.dequeue();
             if (processEvent(evt) == -1)
                 break;
         }

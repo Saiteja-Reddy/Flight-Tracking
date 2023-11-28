@@ -5,9 +5,9 @@
 #include "DatabaseClient.h"
 
 
-int DatabaseClient::processEvent(int i) {
-    std::cout << "Received database event " << i << std::endl;
-    if (i == -1)
+int DatabaseClient::processEvent(const FlightStatusEvent& event) {
+    std::cout << "Received database event " << event.getNum() << std::endl;
+    if (event.getNum() == -1)
         return -1;
 }
 

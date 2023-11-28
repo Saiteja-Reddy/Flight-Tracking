@@ -4,9 +4,9 @@
 
 #include "UIClient.h"
 
-int UIClient::processEvent(int i) {
-    std::cout << "Received UI event " << i << std::endl;
-    if (i == -1)
+int UIClient::processEvent(const FlightStatusEvent& event) {
+    std::cout << "Received UI event " << event.getNum() << std::endl;
+    if (event.getNum() == -1)
         return -1;
 }
 

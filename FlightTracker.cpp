@@ -4,19 +4,19 @@
 
 #include "FlightTracker.h"
 
-void FlightTracker::registerObserver(const std::shared_ptr<Observer>& observer) {
+void FlightTracker::registerObserver(const std::shared_ptr<FlightObserver>& observer) {
     observers.push_back(observer);
 }
 
-void FlightTracker::removeObserver(const std::shared_ptr<Observer>& observer) {
+void FlightTracker::removeObserver(const std::shared_ptr<FlightObserver>& observer) {
     auto it = std::find(observers.begin(), observers.end(), observer);
     if (it != observers.end()) {
         observers.erase(it);
     }
 }
 
-void FlightTracker::notifyObservers(int i) {
+void FlightTracker::notifyObservers(const FlightStatusEvent& event) {
     for(auto& observer: observers) {
-        observer->onEvent(i);
+        observer->onEvent(event);
     }
 }

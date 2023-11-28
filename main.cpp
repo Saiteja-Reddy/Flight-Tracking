@@ -49,11 +49,11 @@ enum {
 };
 
 
-class MyFrame : public wxFrame, public Observer {
+class MyFrame : public wxFrame, public Observer<FlightStatusEvent> {
 public:
     MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 
-    void onEvent(int num) override;
+    void onEvent(const FlightStatusEvent& event) override;
 
 private:
     void OnHello(wxCommandEvent &event);
@@ -89,11 +89,11 @@ auto dc = std::make_shared<DatabaseClient>();
 auto uic = std::make_shared<UIClient>();
 
 bool MyApp::OnInit() {
-    auto frame = std::make_shared<MyFrame>("Flight Tracker", wxPoint(50, 50), wxSize(450, 340));
+    auto* frame = new MyFrame("Flight Tracker", wxPoint(50, 50), wxSize(450, 340));
     frame->Show(true);
     ft.registerObserver(dc);
     ft.registerObserver(uic);
-    ft.registerObserver(frame);
+    ft.registerObserver(std::shared_ptr<MyFrame>(frame));
     dc->start();
     uic->start();
     ft.start();
@@ -169,7 +169,7 @@ void MyFrame::OnExit(wxCommandEvent &event) {
     dc->stop();
     uic->stop();
     Close(true);
-    std::terminate();
+    ft.stop();
 }
 
 void MyFrame::OnAbout(wxCommandEvent &event) {
@@ -186,12 +186,12 @@ void MyFrame::OnHello(wxCommandEvent &event) {
 
 void MyFrame::OnFlightEvent(MyFlightEvent &event) {
     std::cout << "Got event! - " << event.GetNum() << std::endl;
-    addSingleItem(event.GetNum(), "Test Item", "Item Desc");
+    addSingleItem(event.GetNum(), "Test Flight Item", "Item Desc");
 }
 
-void MyFrame::onEvent(int num) {
+void MyFrame::onEvent(const FlightStatusEvent& event) {
     MyFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event);
-    evt.SetNum(num);
+    evt.SetNum(event.getNum());
     wxPostEvent(this, evt);
 }
 
