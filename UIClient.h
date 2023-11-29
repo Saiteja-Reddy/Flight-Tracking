@@ -9,6 +9,9 @@
 #include "SeparateThreadObserver.h"
 #include "FlightStatusEvent.h"
 
+/**
+ * An Observer class which updates the UI
+ */
 class UIClient : public SeparateThreadObserver<FlightStatusEvent> {
 public:
     UIClient();

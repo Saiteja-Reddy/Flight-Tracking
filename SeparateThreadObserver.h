@@ -10,30 +10,53 @@
 #include "SafeQueue.h"
 #include "Observer.h"
 
+/**
+ * Observer class which has it's own event queue in a separate thread.
+ * Upon receiving an event, it is placed in an event queue and returns control.
+ * @tparam T type of event observed
+ */
 template<class T>
 class SeparateThreadObserver : public Observer<T> {
 public:
-    void onEvent(const T& event) override {
+
+    void onEvent(const T &event) override {
         eventQueue.enqueue(event);
     };
 
+    /**
+     * Starts the observer
+     */
     void start() {
         thread_ = std::thread(&SeparateThreadObserver::_event_loop, this);
     };
 
-    virtual int processEvent(const T& event) = 0;
+    /**
+     * Processes the received event
+     * @param event the received event
+     * @return the error code
+     */
+    virtual int processEvent(const T &event) = 0;
 
+    /**
+     * Stops the observer
+     */
     void stop() {
         eventQueue.enqueue(-1);
         thread_.join();
     };
 
+    /**
+     * Destructor
+     */
     virtual ~SeparateThreadObserver() = default;;
 
 private:
     SafeQueue<T> eventQueue;
     std::thread thread_;
 
+    /**
+     * Starts the event loop which fetches events in the queue to process
+     */
     void _event_loop() {
         while (true) {
             auto evt = eventQueue.dequeue();

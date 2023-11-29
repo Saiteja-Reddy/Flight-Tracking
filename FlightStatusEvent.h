@@ -5,6 +5,9 @@
 #ifndef FLIGHT_TRACK_FLIGHTSTATUSEVENT_H
 #define FLIGHT_TRACK_FLIGHTSTATUSEVENT_H
 
+/**
+ * Class to encapsulate a flight state.
+ */
 class FlightStatusEvent {
 public:
     FlightStatusEvent(int n) {

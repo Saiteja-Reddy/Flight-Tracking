@@ -9,7 +9,10 @@
 #include <mutex>
 #include <condition_variable>
 
-// A thread safe queue.
+/**
+ * A Thread safe Queue class
+ * @tparam T the type of elements in the queue
+ */
 template<class T>
 class SafeQueue {
 public:
@@ -17,16 +20,22 @@ public:
 
     ~SafeQueue() = default;
 
-    // Add an element to the queue.
-    void enqueue(const T& t) {
+    /**
+     * Adds an element to the queue.
+     * @param element the element to be added to the queue
+     */
+    void enqueue(const T &element) {
         std::lock_guard<std::mutex> lock(m);
-        q.push(t);
+        q.push(element);
         cv.notify_one();
     }
 
-    // Get the "front"-element.
-    // If the queue is empty, wait till a element is available.
     // TODO: memory check? std::move??
+    /**
+     * Get the "front"-element, of the queue.
+     * If the queue is empty, wait till a element is available.
+     * @return the element at the front of the queue.
+     */
     T dequeue() {
         std::unique_lock<std::mutex> lock(m);
         while (q.empty()) {

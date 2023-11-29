@@ -12,32 +12,38 @@
 
 #endif
 
+/**
+ * UI App class with wxWidgets.
+ */
 class MyApp : public wxApp {
 public:
     bool OnInit() override;
 };
 
 class MyFlightEvent;
+
 wxDECLARE_EVENT(MY_FLIGHT_EVENT, MyFlightEvent);
 wxDEFINE_EVENT(MY_FLIGHT_EVENT, MyFlightEvent);
 
-// define a new event class
-class MyFlightEvent: public wxCommandEvent
-{
+/**
+ * Define a new event class
+ */
+class MyFlightEvent : public wxCommandEvent {
 public:
     explicit MyFlightEvent(wxEventType commandType = MY_FLIGHT_EVENT, int id = 0)
-            :  wxCommandEvent(commandType, id) { }
+            : wxCommandEvent(commandType, id) {}
 
     // You *must* copy here the data to be transported
-    MyFlightEvent(const MyFlightEvent& event)
-            :  wxCommandEvent(event) { this->SetNum(event.GetNum()); }
+    MyFlightEvent(const MyFlightEvent &event)
+            : wxCommandEvent(event) { this->SetNum(event.GetNum()); }
 
     // accessors
     int GetNum() const { return m_num; }
+
     void SetNum(int num) { m_num = num; }
 
     // Required for sending with wxPostEvent()
-    wxEvent* Clone() const override { return new MyFlightEvent(*this); }
+    wxEvent *Clone() const override { return new MyFlightEvent(*this); }
 
 private:
     int m_num{};
@@ -49,11 +55,14 @@ enum {
 };
 
 
+/**
+ * UI App frame class, which also observers flight status events to update the UI.
+ */
 class MyFrame : public wxFrame, public Observer<FlightStatusEvent> {
 public:
     MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 
-    void onEvent(const FlightStatusEvent& event) override;
+    void onEvent(const FlightStatusEvent &event) override;
 
 private:
     void OnHello(wxCommandEvent &event);
@@ -65,7 +74,9 @@ private:
     void OnFlightEvent(MyFlightEvent &event);
 
     wxListView *basicListView;
+
     void populateListView();
+
     void addSingleItem(int id, const std::string &name, const std::string &description);
 
 wxDECLARE_EVENT_TABLE();
@@ -73,13 +84,13 @@ wxDECLARE_EVENT_TABLE();
 
 #define MyFooEventHandler(func) (&func)
 #define EVT_MYFOO(id, func) \
- 	wx__DECLARE_EVT1(MY_FLIGHT_EVENT, id, MyFooEventHandler(func))
+    wx__DECLARE_EVT1(MY_FLIGHT_EVENT, id, MyFooEventHandler(func))
 
 wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
-EVT_MYFOO(ID_Flight_Event, MyFrame::OnFlightEvent)
-EVT_MENU(ID_Hello, MyFrame::OnHello)
-EVT_MENU(wxID_EXIT, MyFrame::OnExit)
-EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
+                EVT_MYFOO(ID_Flight_Event, MyFrame::OnFlightEvent)
+                EVT_MENU(ID_Hello, MyFrame::OnHello)
+                EVT_MENU(wxID_EXIT, MyFrame::OnExit)
+                EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
 wxEND_EVENT_TABLE()
 
 wxIMPLEMENT_APP(MyApp);
@@ -89,7 +100,7 @@ auto dc = std::make_shared<DatabaseClient>();
 auto uic = std::make_shared<UIClient>();
 
 bool MyApp::OnInit() {
-    auto* frame = new MyFrame("Flight Tracker", wxPoint(50, 50), wxSize(450, 340));
+    auto *frame = new MyFrame("Flight Tracker", wxPoint(50, 50), wxSize(450, 340));
     frame->Show(true);
     ft.registerObserver(dc);
     ft.registerObserver(uic);
@@ -139,22 +150,19 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     panel->SetSizerAndFit(sizer);
     populateListView();
 
-    button->Bind(wxEVT_BUTTON, [this, textView](wxCommandEvent &event)
-    {
+    button->Bind(wxEVT_BUTTON, [this, textView](wxCommandEvent &event) {
         auto result = wxGetTextFromUser("Enter your flight number", "Name", "John Doe");
         textView->SetLabel(result);
     });
 }
 
-void MyFrame::populateListView()
-{
+void MyFrame::populateListView() {
     addSingleItem(123, "Some Item", "This is an item");
     addSingleItem(456, "Other Item", "A different item");
     addSingleItem(102, "Another Item", "The best one!");
 }
 
-void MyFrame::addSingleItem(int id, const std::string &name, const std::string &description)
-{
+void MyFrame::addSingleItem(int id, const std::string &name, const std::string &description) {
     int index = basicListView->GetItemCount();
 
     basicListView->InsertItem(index, std::to_string(id));
@@ -189,13 +197,8 @@ void MyFrame::OnFlightEvent(MyFlightEvent &event) {
     addSingleItem(event.GetNum(), "Test Flight Item", "Item Desc");
 }
 
-void MyFrame::onEvent(const FlightStatusEvent& event) {
+void MyFrame::onEvent(const FlightStatusEvent &event) {
     MyFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event);
     evt.SetNum(event.getNum());
     wxPostEvent(this, evt);
 }
-
-/*
- * https://wiki.wxwidgets.org/Custom_Events
- * https://docs.wxwidgets.org/3.0/page_topics.html
- */

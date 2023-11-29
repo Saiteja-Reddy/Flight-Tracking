@@ -11,6 +11,9 @@
 #include "SQLiteCpp/VariadicBind.h"
 #include "FlightStatusEvent.h"
 
+/**
+ * An Observer class which updates the database with flight statuses.
+ */
 class DatabaseClient : public SeparateThreadObserver<FlightStatusEvent> {
 public:
     DatabaseClient() :
