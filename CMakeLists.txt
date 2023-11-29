@@ -16,7 +16,9 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/SQLiteCpp)
 add_executable(flight_track main.cpp SeparateThreadObserver.h DatabaseClient.cpp DatabaseClient.h Observable.h FlightTracker.cpp FlightTracker.h SafeQueue.h UIClient.cpp UIClient.h Observer.h FlightStatusEvent.h
-        FlightStatusEvent.cpp)
+        FlightStatusEvent.cpp
+        OpenSkyRESTClient.cpp
+        OpenSkyRESTClient.h)
 target_link_libraries(flight_track
         SQLiteCpp
         sqlite3
