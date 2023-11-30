@@ -41,7 +41,7 @@ public:
      * Stops the observer
      */
     void stop() {
-        eventQueue.enqueue(-1);
+        eventQueue.enqueue(T()); // TODO: Either make Queue accept both int and FlightStatusEvent, or make a FlightStatusEvent with stopping command
         thread_.join();
     };
 

@@ -52,7 +52,7 @@ private:
     void _main_loop() {
         while (true) {
             sleep(1);
-            auto i = FlightStatusEvent(rand() % 1000);
+            FlightStatusEvent i = FlightStatusEvent();
             std::cout << "Received evt " << i.getNum() << std::endl;
             notifyObservers(i);
             if (i.getNum() == -1) {
