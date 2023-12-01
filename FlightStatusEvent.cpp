@@ -30,3 +30,7 @@ FlightStatusEvent::FlightStatusEvent() {}
 int FlightStatusEvent::getNum() const {
     return rand() % 1000;
 }
+
+std::string FlightStatusEvent::getIcao24() const {
+    return icao24;
+}

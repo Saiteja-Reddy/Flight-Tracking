@@ -10,6 +10,7 @@
 #include <iostream>
 #include "Observable.h"
 #include "FlightStatusEvent.h"
+#include "OpenSkyRESTClient.h"
 #include <unistd.h>
 
 using FlightObserver = Observer<FlightStatusEvent>;
@@ -45,6 +46,7 @@ public:
 private:
     std::vector<std::shared_ptr<FlightObserver>> observers;
     std::thread thread_;
+    OpenSkyRESTClient rest_client = OpenSkyRESTClient();
 
     /**
      * Gathers FlightStatusEvent's and notifies the observers. 
@@ -52,12 +54,15 @@ private:
     void _main_loop() {
         while (true) {
             sleep(1);
-            FlightStatusEvent i = FlightStatusEvent();
-            std::cout << "Received evt " << i.getNum() << std::endl;
-            notifyObservers(i);
-            if (i.getNum() == -1) {
-                std::cout << "Ending program!" << std::endl;
-                break;
+            auto events = rest_client.get_events();
+//            FlightStatusEvent i = FlightStatusEvent();
+            for(auto& event: events) {
+                std::cout << "Received evt " << event << std::endl;
+                notifyObservers(event);
+                if (event.getNum() == -1) {
+                    std::cout << "Ending program!" << std::endl;
+                    break;
+                }
             }
         }
     }

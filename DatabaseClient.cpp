@@ -6,7 +6,7 @@
 
 
 int DatabaseClient::processEvent(const FlightStatusEvent& event) {
-    std::cout << "Received database event " << event.getNum() << std::endl;
+    std::cout << "Received database event " << event << std::endl;
     if (event.getNum() == -1)
         return -1;
     return 0;

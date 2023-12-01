@@ -20,9 +20,15 @@ private:
     uri_builder builder;
     client::http_client client;
 public:
+    // TODO: A list of flights as input - new constructor
+    // TODO: NULL check!
+    // TODO: only send changes from the client
+    // TODO: Add docs!
+    // TODO: Getters and setters for FlightStatusEvents
     OpenSkyRESTClient();
 
     static void display_json(json::value const & jvalue);
+
     std::vector<FlightStatusEvent> make_request(client::http_client & client);
 
     std::vector<FlightStatusEvent> get_events();

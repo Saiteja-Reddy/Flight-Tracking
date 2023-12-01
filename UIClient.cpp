@@ -5,7 +5,7 @@
 #include "UIClient.h"
 
 int UIClient::processEvent(const FlightStatusEvent &event) {
-    std::cout << "Received UI event " << event.getNum() << std::endl;
+    std::cout << "Received UI event " << event << std::endl;
     if (event.getNum() == -1)
         return -1;
     return 0;

@@ -35,18 +35,26 @@ public:
 
     // You *must* copy here the data to be transported
     MyFlightEvent(const MyFlightEvent &event)
-            : wxCommandEvent(event) { this->SetNum(event.GetNum()); }
+            : wxCommandEvent(event) {
+        this->SetNum(event.GetNum());
+        this->SetIcao24(event.GetIcao24());
+    }
 
     // accessors
     int GetNum() const { return m_num; }
 
     void SetNum(int num) { m_num = num; }
 
+    std::string GetIcao24() const { return m_icao24; }
+
+    void SetIcao24(std::string icao24) { m_icao24 = icao24; }
+
     // Required for sending with wxPostEvent()
     wxEvent *Clone() const override { return new MyFlightEvent(*this); }
 
 private:
     int m_num{};
+    std::string m_icao24{};
 };
 
 enum {
@@ -133,7 +141,7 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     auto *panel = new wxPanel(this);
     basicListView = new wxListView(panel);
     basicListView->AppendColumn("ID");
-    basicListView->AppendColumn("Name");
+    basicListView->AppendColumn("ICAO24");
     basicListView->AppendColumn("Description");
     basicListView->SetColumnWidth(0, 80);
     basicListView->SetColumnWidth(1, 120);
@@ -193,12 +201,13 @@ void MyFrame::OnHello(wxCommandEvent &event) {
 }
 
 void MyFrame::OnFlightEvent(MyFlightEvent &event) {
-    std::cout << "Got event! - " << event.GetNum() << std::endl;
-    addSingleItem(event.GetNum(), "Test Flight Item", "Item Desc");
+    std::cout << "Got event in Frame! - " << event.GetIcao24() << std::endl;
+    addSingleItem(event.GetNum(), event.GetIcao24(), "Item Desc");
 }
 
 void MyFrame::onEvent(const FlightStatusEvent &event) {
     MyFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event);
     evt.SetNum(event.getNum());
+    evt.SetIcao24(event.getIcao24());
     wxPostEvent(this, evt);
 }

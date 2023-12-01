@@ -12,7 +12,23 @@
  * Class to encapsulate a flight state.
  */
 class FlightStatusEvent {
+
 public:
+
+    FlightStatusEvent(web::json::array array);
+
+    // Temporary to not break other code
+    FlightStatusEvent();
+
+    friend std::ostream& operator<<(std::ostream& os, FlightStatusEvent const & event) {
+        return os << "FlightStatusEvent{" << event.icao24  << "}";
+    }
+
+    int getNum() const;
+
+    std::string getIcao24() const;
+
+private:
     std::string icao24;
     std::string callsign;
     std::string origin_country;
@@ -32,11 +48,6 @@ public:
     int position_source;
     int category;
 
-    FlightStatusEvent(web::json::array array);
-
-    // Temporary to not break other code
-    FlightStatusEvent();
-    int getNum() const;
 };
 
 #endif //FLIGHT_TRACK_FLIGHTSTATUSEVENT_H
