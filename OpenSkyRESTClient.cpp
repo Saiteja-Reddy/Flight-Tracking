@@ -10,7 +10,8 @@ using namespace web::http;
 OpenSkyRESTClient::OpenSkyRESTClient() :
         base_uri("https://opensky-network.org/"),
         builder("/api/states/all"),
-        client(base_uri)
+        client(base_uri),
+        targets()
 {
     // TODO: Put this into a config file
     client::credentials cred("drose2011", "C++InDesign");
@@ -21,6 +22,26 @@ OpenSkyRESTClient::OpenSkyRESTClient() :
     client = client::http_client(base_uri, config);
 
     builder.append_query("extended", "1");
+}
+
+OpenSkyRESTClient::OpenSkyRESTClient(std::vector<std::string> input_targets) :
+        base_uri("https://opensky-network.org/"),
+        builder("/api/states/all"),
+        client(base_uri),
+        targets(input_targets)
+{
+    // TODO: Put this into a config file
+    client::credentials cred("drose2011", "C++InDesign");
+    client::http_client_config config{};
+    config.set_credentials(cred);
+
+    // TODO: Don't make this class twice
+    client = client::http_client(base_uri, config);
+
+    builder.append_query("extended", "1");
+    for(std::string target : targets) {
+        builder.append_query("icao24", target);
+    }
 }
 
 void OpenSkyRESTClient::display_json(json::value const & jvalue)

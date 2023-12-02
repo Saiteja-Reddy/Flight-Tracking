@@ -46,7 +46,12 @@ public:
 private:
     std::vector<std::shared_ptr<FlightObserver>> observers;
     std::thread thread_;
-    OpenSkyRESTClient rest_client = OpenSkyRESTClient();
+    OpenSkyRESTClient rest_client = OpenSkyRESTClient(std::vector<std::string>{"3c6444"});
+//    OpenSkyRESTClient rest_client = OpenSkyRESTClient(std::vector<std::string>{"3c6444"});
+    /*
+     * Above is example of querying base on a specific icao num only. Doesn't seem to work with
+     * all icaos, but has always worked with this icao for me
+     */
 
     /**
      * Gathers FlightStatusEvent's and notifies the observers. 
