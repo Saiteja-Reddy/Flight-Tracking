@@ -34,21 +34,36 @@ std::vector<FlightStatusEvent> OpenSkyRESTClient::make_request(client::http_clie
     std::vector<FlightStatusEvent> all_events{};
 
     client.request(methods::GET, builder.to_string())
-            .then([this](const http_response& response)
-                  {
-                      json::value json_resp =  response.extract_json().get();
-                      display_json(json_resp);
-                      return json_resp["states"];
-                  })
-            .then([&all_events](web::json::value eventStates)
-                  {
-                      for (const auto& item : eventStates.as_array()) {
-                          auto dataArray = item.as_array();
-                          FlightStatusEvent e(dataArray);
-                          all_events.push_back(e);
-                      }
-                  })
-            .wait();
+        .then([this](const http_response& response)
+        {
+            json::value json_resp{json::value::null()};
+            try {
+                if (response.status_code() == status_codes::OK) {
+                    json_resp = response.extract_json().get()["states"];
+//                    display_json(json_resp);
+                } else {
+                    throw http_exception("Not 200 resp");
+                }
+            } catch (http_exception& e) {
+                std::cout << e.what() << std::endl;
+            }
+            return json_resp;
+        })
+        .then([&all_events](web::json::value eventStates)
+        {
+            if(!eventStates.is_null()) {
+                for (const auto &item: eventStates.as_array()) {
+                    try {
+                        auto dataArray = item.as_array();
+                        FlightStatusEvent e(dataArray);
+                        all_events.push_back(e);
+                    } catch (http_exception& e) {
+                        std::cout << e.error_code().message() << std::endl;
+                    }
+                }
+            }
+        })
+        .wait();
 
     return all_events;
 }
