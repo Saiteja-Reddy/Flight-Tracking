@@ -20,12 +20,15 @@ private:
     uri_builder builder;
     client::http_client client;
     std::vector<std::string> targets;
+    std::map<std::string, FlightStatusEvent> currentStates;
+
+    std::vector<FlightStatusEvent> find_and_update_deltas(std::vector<FlightStatusEvent> all_events);
 public:
-    // TODO: A list of flights as input - new constructor
+    // DONE: A list of flights as input - new constructor
     // DONE: NULL check!
-    // TODO: only send changes from the client
+    // DONE: only send changes from the client
     // TODO: Add docs!
-    // TODO: Getters and setters for FlightStatusEvents
+    // DONE: Getters and setters for FlightStatusEvents
     OpenSkyRESTClient();
 
     OpenSkyRESTClient(std::vector<std::string>);

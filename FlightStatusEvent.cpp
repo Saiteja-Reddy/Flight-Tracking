@@ -25,12 +25,78 @@ FlightStatusEvent::FlightStatusEvent(web::json::array array) {
     category = (!array[17].is_null()) ? array[17].as_integer() : 0;
 }
 
+// TODO: Remove this and add stop command?
 // Temporary to not break other code
 FlightStatusEvent::FlightStatusEvent() {}
 int FlightStatusEvent::getNum() const {
     return rand() % 1000;
 }
+// END Temp
 
 std::string FlightStatusEvent::getIcao24() const {
     return icao24;
+}
+
+const std::string &FlightStatusEvent::getCallsign() const {
+    return callsign;
+}
+
+const std::string &FlightStatusEvent::getOriginCountry() const {
+    return origin_country;
+}
+
+int FlightStatusEvent::getTimePosition() const {
+    return time_position;
+}
+
+int FlightStatusEvent::getLastContact() const {
+    return last_contact;
+}
+
+float FlightStatusEvent::getLongitude() const {
+    return longitude;
+}
+
+float FlightStatusEvent::getLatitude() const {
+    return latitude;
+}
+
+float FlightStatusEvent::getBaroAltitude() const {
+    return baro_altitude;
+}
+
+bool FlightStatusEvent::getOnGound() const {
+    return on_gound;
+}
+
+float FlightStatusEvent::getVelocity() const {
+    return velocity;
+}
+
+float FlightStatusEvent::getTrueTrack() const {
+    return true_track;
+}
+
+float FlightStatusEvent::getVerticalRate() const {
+    return vertical_rate;
+}
+
+float FlightStatusEvent::getGeoAltitude() const {
+    return geo_altitude;
+}
+
+const std::string &FlightStatusEvent::getSquawk() const {
+    return squawk;
+}
+
+bool FlightStatusEvent::getSpi() const {
+    return spi;
+}
+
+int FlightStatusEvent::getPositionSource() const {
+    return position_source;
+}
+
+int FlightStatusEvent::getCategory() const {
+    return category;
 }

@@ -11,7 +11,8 @@ OpenSkyRESTClient::OpenSkyRESTClient() :
         base_uri("https://opensky-network.org/"),
         builder("/api/states/all"),
         client(base_uri),
-        targets()
+        targets(),
+        currentStates()
 {
     // TODO: Put this into a config file
     client::credentials cred("drose2011", "C++InDesign");
@@ -28,7 +29,8 @@ OpenSkyRESTClient::OpenSkyRESTClient(std::vector<std::string> input_targets) :
         base_uri("https://opensky-network.org/"),
         builder("/api/states/all"),
         client(base_uri),
-        targets(input_targets)
+        targets(input_targets),
+        currentStates()
 {
     // TODO: Put this into a config file
     client::credentials cred("drose2011", "C++InDesign");
@@ -49,7 +51,19 @@ void OpenSkyRESTClient::display_json(json::value const & jvalue)
     std::cout << jvalue.serialize() << std::endl;
 }
 
-// TODO: Add error/null checking in each lambda
+std::vector<FlightStatusEvent> OpenSkyRESTClient::find_and_update_deltas(std::vector<FlightStatusEvent> all_events) {
+    std::vector<FlightStatusEvent> updated_events{};
+    for (FlightStatusEvent event : all_events) {
+        std::string icao24 = event.getIcao24();
+        bool no_change = (currentStates.count(icao24) && event == currentStates[icao24]);
+        if (!no_change) {
+            currentStates[icao24] = event;
+            updated_events.push_back(event);
+        }
+    }
+    return updated_events;
+}
+
 std::vector<FlightStatusEvent> OpenSkyRESTClient::make_request(client::http_client & client)
 {
     std::vector<FlightStatusEvent> all_events{};
@@ -85,8 +99,8 @@ std::vector<FlightStatusEvent> OpenSkyRESTClient::make_request(client::http_clie
             }
         })
         .wait();
-
-    return all_events;
+    std::vector<FlightStatusEvent> updates = find_and_update_deltas(all_events);
+    return updates;
 }
 
 // TODO: Add a map to keep track of which flights have been updated and which haven't
