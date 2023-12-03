@@ -42,7 +42,7 @@ OpenSkyRESTClient::OpenSkyRESTClient(std::vector<std::string> input_targets) :
 
     builder.append_query("extended", "1");
     for(std::string target : targets) {
-        builder.append_query("icao24", target);
+        builder.append_query("m_icao24", target);
     }
 }
 

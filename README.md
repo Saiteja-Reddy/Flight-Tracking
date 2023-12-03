@@ -37,7 +37,7 @@ Below are the expected components of our code:
 - Basic display component showing real-time events.
 
 ### Release 1.2
-- Supporting a map view of the flights with latitude/longitude information of the flights.
+- Supporting a map view of the flights with m_latitude/m_longitude information of the flights.
 - Functionality to add an always-running VM to log flight history internally for specific flights for potential users.
 
 ### Testing

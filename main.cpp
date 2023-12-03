@@ -28,33 +28,17 @@ wxDEFINE_EVENT(MY_FLIGHT_EVENT, MyFlightEvent);
 /**
  * Define a new event class
  */
-class MyFlightEvent : public wxCommandEvent {
+class MyFlightEvent : public wxCommandEvent, public FlightStatusEvent {
 public:
-    explicit MyFlightEvent(wxEventType commandType = MY_FLIGHT_EVENT, int id = 0)
-            : wxCommandEvent(commandType, id) {}
+    explicit MyFlightEvent(wxEventType commandType, int id, const FlightStatusEvent &event)
+            : wxCommandEvent(commandType, id), FlightStatusEvent(event) {}
 
     // You *must* copy here the data to be transported
     MyFlightEvent(const MyFlightEvent &event)
-            : wxCommandEvent(event) {
-        this->SetNum(event.GetNum());
-        this->SetIcao24(event.GetIcao24());
-    }
-
-    // accessors
-    int GetNum() const { return m_num; }
-
-    void SetNum(int num) { m_num = num; }
-
-    std::string GetIcao24() const { return m_icao24; }
-
-    void SetIcao24(std::string icao24) { m_icao24 = icao24; }
+            : wxCommandEvent(event), FlightStatusEvent(event) {}
 
     // Required for sending with wxPostEvent()
     wxEvent *Clone() const override { return new MyFlightEvent(*this); }
-
-private:
-    int m_num{};
-    std::string m_icao24{};
 };
 
 enum {
@@ -194,20 +178,15 @@ void MyFrame::OnAbout(wxCommandEvent &event) {
 }
 
 void MyFrame::OnHello(wxCommandEvent &event) {
-    MyFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event);
-    evt.SetNum(12);
-    wxPostEvent(this, evt);
     std::cout << "Hello called!" << std::endl;
 }
 
 void MyFrame::OnFlightEvent(MyFlightEvent &event) {
-    std::cout << "Got event in Frame! - " << event.GetIcao24() << std::endl;
-    addSingleItem(event.GetNum(), event.GetIcao24(), "Item Desc");
+    std::cout << "Got event in Frame! - " << event.getIcao24() << std::endl;
+    addSingleItem(event.getNum(), event.getIcao24(), "Item Desc");
 }
 
 void MyFrame::onEvent(const FlightStatusEvent &event) {
-    MyFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event);
-    evt.SetNum(event.getNum());
-    evt.SetIcao24(event.getIcao24());
+    MyFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event , event);
     wxPostEvent(this, evt);
 }
