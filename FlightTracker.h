@@ -62,7 +62,7 @@ private:
             sleep(1);
             FlightStatusEvent i = FlightStatusEvent();
             i.setIcao24("23b4d");
-            i.setCallsign("PTR23");
+            i.setCallsign("PTR99");
             i.setOriginCountry("USA");
             std::vector<FlightStatusEvent> events = {i};
 //            auto events = rest_client.get_events();

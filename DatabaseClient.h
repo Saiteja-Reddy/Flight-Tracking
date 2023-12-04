@@ -37,8 +37,6 @@ public:
      */
     void processEvent(const FlightStatusEvent &event) override;
 
-    void updateDB(int num);
-
 private:
     // Open a database file
     SQLite::Database db;
@@ -49,8 +47,9 @@ private:
                                      "icao24          TEXT PRIMARY KEY not null,\n"
                                      "callsign        TEXT,\n"
                                      "origin_country  TEXT,\n"
+                                     "time_position   INT,\n"
+                                     "last_contact    INT,\n"
                                      "longitude       FLOAT,\n"
-                                     "last_contact    integer,\n"
                                      "latitude        float,\n"
                                      "baro_altitude   float,\n"
                                      "on_ground       INT,\n"
@@ -63,6 +62,13 @@ private:
                                      "position_source integer,\n"
                                      "category        integer\n"
                                      ")";
+
+    /**
+     * Returns SQL update string for flight status event
+     * @param event input event
+     * @return SQL update string
+     */
+    static std::string getSQLUpdateString(const FlightStatusEvent &event);
 };
 
 #endif //FLIGHT_TRACK_DATABASECLIENT_H
