@@ -66,13 +66,9 @@ private:
             i.setOriginCountry("USA");
             std::vector<FlightStatusEvent> events = {i};
 //            auto events = rest_client.get_events();
-            for(auto& event: events) {
+            for (auto &event: events) {
                 std::cout << "Received evt " << event << std::endl;
                 notifyObservers(event);
-                if (event.getNum() == -1) {
-                    std::cout << "Ending program!" << std::endl;
-                    break;
-                }
             }
         }
     }

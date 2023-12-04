@@ -34,9 +34,8 @@ public:
      * Function which processes the received flight status event.
      * Updates the backend database with the new flight status.
      * @param event received flight status
-     * @return status error code
      */
-    int processEvent(const FlightStatusEvent &event) override;
+    void processEvent(const FlightStatusEvent &event) override;
 
     void updateDB(int num);
 

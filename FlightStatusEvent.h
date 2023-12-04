@@ -7,6 +7,7 @@
 
 #include <string>
 #include <cpprest/http_client.h>
+#include <optional>
 
 /**
  * Class to encapsulate a flight state.
@@ -58,9 +59,6 @@ public:
                current.m_category == other.getCategory();
     }
 
-    int getNum() const;
-
-    void setNum(int num);
 
     /**
      * Fetch ICAO24 code.
@@ -80,7 +78,7 @@ public:
      * Callsign of the vehicle (8 chars). Can be null if no callsign has been received.
      * @return the call sign
      */
-    std::string getCallsign() const;
+    std::optional<std::string> getCallsign() const;
 
 
     /**
@@ -107,7 +105,7 @@ public:
      * Unix timestamp (seconds) for the last position update. Can be null if no position report was received by OpenSky within the past 15s.
      * @return the time position
      */
-    int getTimePosition() const;
+    std::optional<int> getTimePosition() const;
 
     /**
      * Setter for time position
@@ -133,7 +131,7 @@ public:
      * WGS-84 longitude in decimal degrees. Can be null.
      * @return the longitude
      */
-    float getLongitude() const;
+    std::optional<float> getLongitude() const;
 
     /**
      * Setter for longitude
@@ -146,7 +144,7 @@ public:
      * WGS-84 latitude in decimal degrees. Can be null.
      * @return the latitude
      */
-    float getLatitude() const;
+    std::optional<float> getLatitude() const;
 
     /**
      * Setter for latitude
@@ -159,7 +157,7 @@ public:
      * Barometric altitude in meters. Can be null.
      * @return the Barometric altitude
      */
-    float getBaroAltitude() const;
+    std::optional<float> getBaroAltitude() const;
 
     /**
      * Setter for Barometric altitude
@@ -184,7 +182,7 @@ public:
      * Fetch velocity over ground in m/s. Can be null.
      * @return the velocity
      */
-    float getVelocity() const;
+    std::optional<float> getVelocity() const;
 
     /**
      * Setter for velocity
@@ -197,7 +195,7 @@ public:
      * True track in decimal degrees clockwise from north (north=0°). Can be null.
      * @return true track
      */
-    float getTrueTrack() const;
+    std::optional<float> getTrueTrack() const;
 
     /**
      * Setter for true track
@@ -210,7 +208,7 @@ public:
      * Vertical rate in m/s. A positive value indicates that the airplane is climbing, a negative value indicates that it descends. Can be null.
      * @return the vertical rate
      */
-    float getVerticalRate() const;
+    std::optional<float> getVerticalRate() const;
 
     /**
      * Setter for vertical rate
@@ -223,7 +221,7 @@ public:
      * Geometric altitude in meters. Can be null.
      * @return the geometric altitude
      */
-    float getGeoAltitude() const;
+    std::optional<float> getGeoAltitude() const;
 
     /**
      * Setter for geometric altitude
@@ -235,7 +233,7 @@ public:
      * Fetch the transponder code aka Squawk. Can be null.
      * @return the transponder code
      */
-    std::string getSquawk() const;
+    std::optional<std::string> getSquawk() const;
 
     /**
      * Setter for transponder code aka Squawk
@@ -307,22 +305,21 @@ public:
     void setCategory(int category);
 
 private:
-    int m_num;
     std::string m_icao24;
-    std::string m_callsign;
+    std::optional<std::string> m_callsign;
     std::string m_origin_country;
-    int m_time_position{};
+    std::optional<int> m_time_position{};
     int m_last_contact{};
-    float m_longitude{};
-    float m_latitude{};
-    float m_baro_altitude{};
+    std::optional<float> m_longitude{};
+    std::optional<float> m_latitude{};
+    std::optional<float> m_baro_altitude{};
     bool m_on_ground{};
-    float m_velocity{};
-    float m_true_track{};
-    float m_vertical_rate{};
+    std::optional<float> m_velocity{};
+    std::optional<float> m_true_track{};
+    std::optional<float> m_vertical_rate{};
 //    web::json::array sensors;
-    float m_geo_altitude{};
-    std::string m_squawk;
+    std::optional<float> m_geo_altitude{};
+    std::optional<std::string> m_squawk;
     bool m_spi{};
     int m_position_source{};
     int m_category{};

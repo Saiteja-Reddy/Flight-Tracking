@@ -33,16 +33,16 @@ public:
     /**
      * Processes the received event
      * @param event the received event
-     * @return the error code
      */
-    virtual int processEvent(const T &event) = 0;
+    virtual void processEvent(const T &event) = 0;
 
     /**
      * Stops the observer
      */
     void stop() {
-        eventQueue.enqueue(T()); // TODO: Either make Queue accept both int and FlightStatusEvent, or make a FlightStatusEvent with stopping command
-        thread_.join();
+//        eventQueue.enqueue(T()); // TODO: Either make Queue accept both int and FlightStatusEvent, or make a FlightStatusEvent with stopping command
+//        thread_.join();
+        std::terminate();
     };
 
     /**
@@ -60,8 +60,9 @@ private:
     void _event_loop() {
         while (true) {
             auto evt = eventQueue.dequeue();
-            if (processEvent(evt) == -1)
-                break;
+            processEvent(evt);
+//            if (processEvent(evt) == -1)
+//                break;
         }
     };
 };
