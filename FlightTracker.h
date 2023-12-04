@@ -12,6 +12,7 @@
 #include "FlightStatusEvent.h"
 #include "OpenSkyRESTClient.h"
 #include <unistd.h>
+#include <vector>
 
 using FlightObserver = Observer<FlightStatusEvent>;
 
@@ -59,8 +60,12 @@ private:
     void _main_loop() {
         while (true) {
             sleep(1);
-            auto events = rest_client.get_events();
-//            FlightStatusEvent i = FlightStatusEvent();
+            FlightStatusEvent i = FlightStatusEvent();
+            i.setIcao24("23b4d");
+            i.setCallsign("PTR23");
+            i.setOriginCountry("USA");
+            std::vector<FlightStatusEvent> events = {i};
+//            auto events = rest_client.get_events();
             for(auto& event: events) {
                 std::cout << "Received evt " << event << std::endl;
                 notifyObservers(event);

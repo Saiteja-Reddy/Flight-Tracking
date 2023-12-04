@@ -14,9 +14,18 @@
  */
 class UIClient : public SeparateThreadObserver<FlightStatusEvent> {
 public:
+    /**
+     * Constructor
+     */
     UIClient();
 
-    int processEvent(const FlightStatusEvent& event) override;
+    /**
+     * Function which processes the received flight status event.
+     * Updates the UI with the new flight status.
+     * @param event received flight status
+     * @return status error code
+     */
+    int processEvent(const FlightStatusEvent &event) override;
 };
 
 

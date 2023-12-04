@@ -17,6 +17,10 @@
  */
 class MyApp : public wxApp {
 public:
+    /**
+     * Runs on App init
+     * @return error status code
+     */
     bool OnInit() override;
 };
 
@@ -26,18 +30,31 @@ wxDECLARE_EVENT(MY_FLIGHT_EVENT, MyFlightEvent);
 wxDEFINE_EVENT(MY_FLIGHT_EVENT, MyFlightEvent);
 
 /**
- * Define a new event class
+ * Define a new event class to process flight events
  */
 class MyFlightEvent : public wxCommandEvent, public FlightStatusEvent {
 public:
+    /**
+     * Constructor
+     * @param commandType the event type
+     * @param id the event id
+     * @param event the received flight status event to be processed
+     */
     explicit MyFlightEvent(wxEventType commandType, int id, const FlightStatusEvent &event)
             : wxCommandEvent(commandType, id), FlightStatusEvent(event) {}
 
-    // You *must* copy here the data to be transported
+    /**
+     * Copy constructor
+     * @param event the event to be copied
+     */
     MyFlightEvent(const MyFlightEvent &event)
             : wxCommandEvent(event), FlightStatusEvent(event) {}
 
-    // Required for sending with wxPostEvent()
+    /**
+     * Method to clone this class
+     * Required by wxPostEvent()
+     * @return the cloned copy
+     */
     wxEvent *Clone() const override { return new MyFlightEvent(*this); }
 };
 
@@ -52,17 +69,43 @@ enum {
  */
 class MyFrame : public wxFrame, public Observer<FlightStatusEvent> {
 public:
+    /**
+     * Constructor
+     * @param title the UI frame title
+     * @param pos position
+     * @param size size
+     */
     MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 
+    /**
+     * Handles UI updates on receiving a flight status event.
+     * @param event
+     */
     void onEvent(const FlightStatusEvent &event) override;
 
 private:
+    /**
+     * Function to handle Hello event
+     * @param event
+     */
     void OnHello(wxCommandEvent &event);
 
+    /**
+     * Function to handle Exit
+     * @param event
+     */
     void OnExit(wxCommandEvent &event);
 
+    /**
+     * Function to handle clicking About
+     * @param event
+     */
     void OnAbout(wxCommandEvent &event);
 
+    /**
+     * Helper function to process flight event
+     * @param event received flight event
+     */
     void OnFlightEvent(MyFlightEvent &event);
 
     wxListView *basicListView;
