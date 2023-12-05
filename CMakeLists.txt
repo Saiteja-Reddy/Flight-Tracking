@@ -51,7 +51,7 @@ add_executable(flight_track main.cpp
         Observer.h
         FlightStatusEvent.h FlightStatusEvent.cpp
         ADSBlolRESTClient.cpp ADSBlolRESTClient.h
-)
+        MyFrame.cpp MyFrame.h MyFlightEvent.h)
 
 target_link_libraries(flight_track
         SQLiteCpp
