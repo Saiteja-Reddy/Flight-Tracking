@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['getbaroaltitude_0',['getBaroAltitude',['../classFlightStatusEvent.html#a850d67bd16ec4037c356f05961068a55',1,'FlightStatusEvent']]],
+  ['getcallsign_1',['getCallsign',['../classFlightStatusEvent.html#a7863518c3f7f0fe2b3989e60b4de705d',1,'FlightStatusEvent']]],
+  ['getcategory_2',['getCategory',['../classFlightStatusEvent.html#aeb7b6144a686ef71ea5c1091c24a593c',1,'FlightStatusEvent']]],
+  ['getgeoaltitude_3',['getGeoAltitude',['../classFlightStatusEvent.html#a8dd5279a152d8a15393d9638783fd172',1,'FlightStatusEvent']]],
+  ['geticao24_4',['getIcao24',['../classFlightStatusEvent.html#a8ac1f356ac025fdd0787b419257ec2e7',1,'FlightStatusEvent']]],
+  ['getlastcontact_5',['getLastContact',['../classFlightStatusEvent.html#aeb961ef03df463c6b250b5e87cc3fae4',1,'FlightStatusEvent']]],
+  ['getlatitude_6',['getLatitude',['../classFlightStatusEvent.html#acc215fb40b5d655b938fd16a1777ba6a',1,'FlightStatusEvent']]],
+  ['getlongitude_7',['getLongitude',['../classFlightStatusEvent.html#aaba2dae993defd2cced825d9783d763c',1,'FlightStatusEvent']]],
+  ['getonground_8',['getOnGround',['../classFlightStatusEvent.html#a364bdc9c45f6216313719753632c6893',1,'FlightStatusEvent']]],
+  ['getorigincountry_9',['getOriginCountry',['../classFlightStatusEvent.html#a1f2baf3ea710ae6f8ef8c78906fcdaea',1,'FlightStatusEvent']]],
+  ['getpositionsource_10',['getPositionSource',['../classFlightStatusEvent.html#a7575f98f0adcd96eac1f1dd642b58e4c',1,'FlightStatusEvent']]],
+  ['getspi_11',['getSpi',['../classFlightStatusEvent.html#a58a20d08a96750d75cbb5d5fb552c669',1,'FlightStatusEvent']]],
+  ['getsquawk_12',['getSquawk',['../classFlightStatusEvent.html#a2b81acd2d9f83f7ecb189b2dc3c6a3b7',1,'FlightStatusEvent']]],
+  ['gettimeposition_13',['getTimePosition',['../classFlightStatusEvent.html#ae0eccaa498e28c59ea390c5205665586',1,'FlightStatusEvent']]],
+  ['gettruetrack_14',['getTrueTrack',['../classFlightStatusEvent.html#ad475504464a7c60df2193f210d407f2d',1,'FlightStatusEvent']]],
+  ['getvelocity_15',['getVelocity',['../classFlightStatusEvent.html#a9f49b2061e67ae9b53c0692370fad560',1,'FlightStatusEvent']]],
+  ['getverticalrate_16',['getVerticalRate',['../classFlightStatusEvent.html#a491a7dbe94ac76a9001da797f10283bd',1,'FlightStatusEvent']]]
+];
