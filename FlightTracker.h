@@ -60,11 +60,6 @@ private:
     void _main_loop() {
         while (true) {
             sleep(5);
-//            FlightStatusEvent i = FlightStatusEvent();
-//            i.setIcao24("23b4d");
-//            i.setCallsign("PTR99");
-//            i.setOriginCountry("USA");
-//            std::vector<FlightStatusEvent> events = {i};
             auto events = rest_client.get_events();
             for (auto &event: events) {
                 std::cout << "Received evt " << event << std::endl;
