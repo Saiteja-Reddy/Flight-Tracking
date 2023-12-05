@@ -3,8 +3,8 @@ project(flight_track)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(OPENSSL_ROOT_DIR "/opt/homebrew/Cellar/openssl@3/3.2.0")
-set(OPENSSL_INCLUDE_DIR "/opt/homebrew/Cellar/openssl@3/3.2.0/include")
+set(OPENSSL_ROOT_DIR "/opt/homebrew/Cellar/openssl@3/3.0.7")
+set(OPENSSL_INCLUDE_DIR "/opt/homebrew/Cellar/openssl@3/3.0.7/include")
 set(CPPRESTSDK_INCLUDE_DIR "/opt/homebrew/Cellar/cpprestsdk/2.10.18_1/include")
 
 find_package(OpenSSL REQUIRED)
@@ -50,7 +50,8 @@ add_executable(flight_track main.cpp
         UIClient.cpp UIClient.h
         Observer.h
         FlightStatusEvent.h FlightStatusEvent.cpp
-        OpenSkyRESTClient.cpp OpenSkyRESTClient.h)
+        ADSBlolRESTClient.cpp ADSBlolRESTClient.h
+)
 
 target_link_libraries(flight_track
         SQLiteCpp
