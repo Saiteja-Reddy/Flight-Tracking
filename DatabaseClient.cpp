@@ -21,76 +21,93 @@ std::string DatabaseClient::getSQLUpdateString(const FlightStatusEvent &event) {
     std::string fields;
     std::string values;
 
-    fields += "icao24, ";
-    values += "'" + event.getIcao24() + "', ";
+    fields += "icao24";
+    values += "'" + event.getIcao24() + "'";
 
-//    if (event.getCallsign().has_value()) {
-//        fields += "callsign, ";
-//        values += "'" + event.getCallsign().value() + "', ";
-//    }
-//
-//    fields += "origin_country, ";
-//    values += "'" + event.getOriginCountry() + "', ";
-//
-//    if (event.getTimePosition().has_value()) {
-//        fields += "time_position, ";
-//        values += std::to_string(event.getTimePosition().value()) + ", ";
-//    }
-//
-//    fields += "last_contact, ";
-//    values += std::to_string(event.getLastContact()) + ", ";
-//
-//    if (event.getLongitude().has_value()) {
-//        fields += "longitude, ";
-//        values += std::to_string(event.getLongitude().value()) + ", ";
-//    }
-//
-//    if (event.getLatitude().has_value()) {
-//        fields += "latitude, ";
-//        values += std::to_string(event.getLatitude().value()) + ", ";
-//    }
-//
-//    if (event.getBaroAltitude().has_value()) {
-//        fields += "baro_altitude, ";
-//        values += std::to_string(event.getBaroAltitude().value()) + ", ";
-//    }
-//
-//    fields += "on_ground, ";
-//    values += std::to_string(event.getOnGround()) + ", ";
-//
-//    if (event.getVelocity().has_value()) {
-//        fields += "velocity, ";
-//        values += std::to_string(event.getVelocity().value()) + ", ";
-//    }
-//
-//    if (event.getTrueTrack().has_value()) {
-//        fields += "true_track, ";
-//        values += std::to_string(event.getTrueTrack().value()) + ", ";
-//    }
-//
-//    if (event.getVerticalRate().has_value()) {
-//        fields += "vertical_rate, ";
-//        values += std::to_string(event.getVerticalRate().value()) + ", ";
-//    }
-//
-//    if (event.getGeoAltitude().has_value()) {
-//        fields += "geo_altitude, ";
-//        values += std::to_string(event.getGeoAltitude().value()) + ", ";
-//    }
-//
-//    if (event.getSquawk().has_value()) {
-//        fields += "squawk, ";
-//        values += "'" + event.getSquawk().value() + "', ";
-//    }
-//
-//    fields += "spi, ";
-//    values += std::to_string(event.getSpi()) + ", ";
-//
-//    fields += "position_source, ";
-//    values += std::to_string(event.getPositionSource()) + ", ";
-//
-//    fields += "category";
-//    values += std::to_string(event.getCategory());
+    if (event.getCallsign().has_value()) {
+        fields += ", callsign";
+        values += ", '" + event.getCallsign().value() + "'";
+    }
+
+    if (event.getRegistration().has_value()) {
+        fields += ", registration";
+        values += ", '" + event.getRegistration().value() + "'";
+    }
+
+    if (event.getType().has_value()) {
+        fields += ", type";
+        values += ", '" + event.getType().value() + "'";
+    }
+
+    if (event.getBaroAltitude().has_value()) {
+        fields += ", baro_altitude";
+        values += ", " + std::to_string(event.getBaroAltitude().value());
+    }
+
+    if (event.getGeoAltitude().has_value()) {
+        fields += ", geo_altitude";
+        values += ", " + std::to_string(event.getGeoAltitude().value());
+    }
+
+    if (event.getNavAltitude().has_value()) {
+        fields += ", nav_altitude";
+        values += ", " + std::to_string(event.getNavAltitude().value());
+    }
+
+    if (event.getGroundSpeed().has_value()) {
+        fields += ", ground_speed";
+        values += ", " + std::to_string(event.getGroundSpeed().value());
+    }
+
+    if (event.getIndicatedAirspeed().has_value()) {
+        fields += ", indicated_airspeed";
+        values += ", " + std::to_string(event.getIndicatedAirspeed().value());
+    }
+
+    if (event.getTrueAirspeed().has_value()) {
+        fields += ", true_airspeed";
+        values += ", " + std::to_string(event.getTrueAirspeed().value());
+    }
+
+    if (event.getOutsideAirTemp().has_value()) {
+        fields += ", outside_air_temp";
+        values += ", " + std::to_string(event.getOutsideAirTemp().value());
+    }
+
+    if (event.getMagTrack().has_value()) {
+        fields += ", mag_track";
+        values += ", " + std::to_string(event.getMagTrack().value());
+    }
+
+    if (event.getTrueHeading().has_value()) {
+        fields += ", true_heading";
+        values += ", " + std::to_string(event.getTrueHeading().value());
+    }
+
+    if (event.getLongitude().has_value()) {
+        fields += ", longitude";
+        values += ", " + std::to_string(event.getLongitude().value());
+    }
+
+    if (event.getLatitude().has_value()) {
+        fields += ", latitude";
+        values += ", " + std::to_string(event.getLatitude().value());
+    }
+
+    if (event.getSquawk().has_value()) {
+        fields += ", squawk";
+        values += ", '" + event.getSquawk().value() + "'";
+    }
+
+    if (event.getEmergency().has_value()) {
+        fields += ", emergency";
+        values += ", '" + event.getEmergency().value() + "'";
+    }
+
+    if (event.getCategory().has_value()) {
+        fields += ", category";
+        values += ", '" + event.getCategory().value() + "'";
+    }
 
     return "INSERT OR REPLACE INTO flights (" + fields + ") VALUES (" + values + ")";
 }

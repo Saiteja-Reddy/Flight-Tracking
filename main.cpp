@@ -144,7 +144,7 @@ auto uic = std::make_shared<UIClient>();
 bool MyApp::OnInit() {
     auto *frame = new MyFrame("Flight Tracker", wxPoint(50, 50), wxSize(450, 340));
     frame->Show(true);
-//    ft.registerObserver(dc);
+    ft.registerObserver(dc);
     ft.registerObserver(uic);
     ft.registerObserver(std::shared_ptr<MyFrame>(frame));
     dc->start();
@@ -247,7 +247,7 @@ void MyFrame::addSingleItem(const MyFlightEvent &event) {
     basicListView->SetItem(index, 16, to_optional_string(event.getTrueHeading()));
     basicListView->SetItem(index, 17, event.getEmergency().value_or("-"));
     basicListView->SetItem(index, 18, event.getCategory().value_or("-"));
-    basicListView->SetItem(index, 19, event.getSquak().value_or("-"));
+    basicListView->SetItem(index, 19, event.getSquawk().value_or("-"));
 
     // for sorting using the SortItems method
     basicListView->SetItemData(index, index + 1);

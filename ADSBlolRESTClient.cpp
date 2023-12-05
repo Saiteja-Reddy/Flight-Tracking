@@ -56,7 +56,6 @@ std::vector<FlightStatusEvent> ADSBlolRESTClient::make_request(const http_reques
                   try {
                       if (response.status_code() == status_codes::OK) {
                           json_resp = response.extract_json().get()["ac"];
-//                    display_json(json_resp);
                       } else {
                           throw http_exception("Not 200 resp");
                       }
