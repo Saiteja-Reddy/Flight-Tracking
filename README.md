@@ -2,6 +2,8 @@
 
 Team: Dylan Rose, Gargi Patil, Sai Teja Reddy Moolamalla
 
+Library Documentation: https://saiteja-reddy.github.io/Flight-Tracking/
+
 ## Overview
 For our project, our goal is to make and use a well-designed C++ wrapper around an existing API to fetch flight-tracking data. We will be designing a wrapper to expose the REST API to C++ programs with an intuitive interface, and then build a display/UI to demo the functionality and potential use cases for our wrapper. We will include a set of tests for the wrapper, documentation, and measurements regarding the effect the wrapper has on request performance. 
 
