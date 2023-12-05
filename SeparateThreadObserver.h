@@ -48,7 +48,7 @@ public:
     /**
      * Destructor
      */
-    virtual ~SeparateThreadObserver() = default;;
+    virtual ~SeparateThreadObserver() = default;
 
 private:
     SafeQueue<T> eventQueue;

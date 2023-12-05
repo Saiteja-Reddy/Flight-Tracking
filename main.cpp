@@ -119,12 +119,12 @@ private:
 wxDECLARE_EVENT_TABLE();
 };
 
-#define MyFooEventHandler(func) (&func)
-#define EVT_MYFOO(id, func) \
-    wx__DECLARE_EVT1(MY_FLIGHT_EVENT, id, MyFooEventHandler(func))
+#define FlightEventHandler(func) (&func)
+#define EVT_FLIGHT_STAT(id, func) \
+    wx__DECLARE_EVT1(MY_FLIGHT_EVENT, id, FlightEventHandler(func))
 
 wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
-                EVT_MYFOO(ID_Flight_Event, MyFrame::OnFlightEvent)
+                EVT_FLIGHT_STAT(ID_Flight_Event, MyFrame::OnFlightEvent)
                 EVT_MENU(ID_Hello, MyFrame::OnHello)
                 EVT_MENU(wxID_EXIT, MyFrame::OnExit)
                 EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
