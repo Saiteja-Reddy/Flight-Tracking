@@ -50,7 +50,8 @@ add_executable(flight_track main.cpp
         UIClient.cpp UIClient.h
         Observer.h
         FlightStatusEvent.h FlightStatusEvent.cpp
-        OpenSkyRESTClient.cpp OpenSkyRESTClient.h)
+        ADSBlolRESTClient.cpp ADSBlolRESTClient.h
+)
 
 target_link_libraries(flight_track
         SQLiteCpp

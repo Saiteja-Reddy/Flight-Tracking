@@ -20,7 +20,7 @@ public:
      * Constructor
      * @param array array output from REST call
      */
-    explicit FlightStatusEvent(web::json::array array);
+    explicit FlightStatusEvent(web::json::value jvalue);
 
     /**
      * Default constructor
@@ -38,291 +38,193 @@ public:
     }
 
     friend bool operator==(FlightStatusEvent const &current, FlightStatusEvent const &other) {
-
         return current.m_icao24 == other.getIcao24() &&
+               current.m_receiver_type == other.getReceiverType() &&
                current.m_callsign == other.getCallsign() &&
-               current.m_origin_country == other.getOriginCountry() &&
-               current.m_time_position == other.getTimePosition() &&
-               current.m_last_contact == other.getLastContact() &&
-               current.m_longitude == other.getLongitude() &&
-               current.m_latitude == other.getLatitude() &&
+               current.m_registration == other.getRegistration() &&
+               current.m_type == other.getType() &&
                current.m_baro_altitude == other.getBaroAltitude() &&
-               current.m_on_ground == other.getOnGround() &&
-               current.m_velocity == other.getVelocity() &&
-               current.m_true_track == other.getTrueTrack() &&
-               current.m_vertical_rate == other.getVerticalRate() &&
-               // current.sensors == other.getSensors() &&
                current.m_geo_altitude == other.getGeoAltitude() &&
+               current.m_nav_altitude == other.getNavAltitude() &&
+               current.m_ground_speed == other.getGroundSpeed() &&
+               current.m_indicated_airspeed == other.getIndicatedAirspeed() &&
+               current.m_true_airspeed == other.getTrueAirspeed() &&
+               current.m_outside_air_temp == other.getOutsideAirTemp() &&
+               current.m_mag_track == other.getMagTrack() &&
+               current.m_true_heading == other.getTrueHeading() &&
                current.m_squawk == other.getSquawk() &&
-               current.m_spi == other.getSpi() &&
-               current.m_position_source == other.getPositionSource() &&
-               current.m_category == other.getCategory();
+               current.m_emergency == other.getEmergency() &&
+               current.m_category == other.getCategory() &&
+               current.m_longitude == other.getLongitude() &&
+               current.m_latitude == other.getLatitude();
     }
 
+private:
+    std::string m_icao24;
+    std::optional<std::string> m_receiver_type;
+    std::optional<std::string> m_callsign;
+    std::optional<std::string> m_registration;
+    std::optional<std::string> m_type;
+    std::optional<float> m_baro_altitude{};
+    std::optional<float> m_geo_altitude{};
+    std::optional<float> m_nav_altitude{};
+    std::optional<float> m_ground_speed{};
+    std::optional<float> m_indicated_airspeed{};
+    std::optional<float> m_true_airspeed{};
+    std::optional<float> m_outside_air_temp{};
+    std::optional<float> m_mag_track{};
+    std::optional<float> m_true_heading{};
+    std::optional<std::string> m_squawk{};
+    std::optional<std::string> m_emergency{};
+    std::optional<std::string> m_category{};
+    std::optional<float> m_longitude{};
+    std::optional<float> m_latitude{};
+
+public:
 
     /**
      * Fetch ICAO24 code.
      * Unique ICAO 24-bit address of the transponder in hex string representation.
      * @return the icao24 code
      */
-    std::string getIcao24() const;
+    const std::string &getIcao24() const;
 
     /**
-     * Setter for ICAO24 code
-     * @param icao24 input code
+     * Fetch receiver type.
+     * type of underlying messages / best source of current data for this position / aircraft: (the following list is in order of which data is preferentially used)
+     * - adsb_icao: messages from a Mode S or ADS-B transponder, using a 24-bit ICAO address
+     * - adsb_icao_nt: messages from an ADS-B equipped "non-transponder" emitter e.g. a ground vehicle, using a 24-bit ICAO address
+     * - adsr_icao: rebroadcast of ADS-B messages originally sent via another data link e.g. UAT, using a 24-bit ICAO address
+     * - tisb_icao: traffic information about a non-ADS-B target identified by a 24-bit ICAO address, e.g. a Mode S target tracked by secondary radar
+     * - adsc: ADS-C (received by monitoring satellite downlinks)
+     * - mlat: MLAT, position calculated arrival time differences using multiple receivers, outliers and varying accuracy is expected.
+     * - other: miscellaneous data received via Basestation / SBS format, quality / source is unknown.
+     * - mode_s: ModeS data from the planes transponder (no position transmitted)
+     * - adsb_other: messages from an ADS-B transponder using a non-ICAO address, e.g. anonymized address
+     * - adsr_other: rebroadcast of ADS-B messages originally sent via another data link e.g. UAT, using a non-ICAO address
+     * - tisb_other: traffic information about a non-ADS-B target using a non-ICAO address
+     * - tisb_trackfile: traffic information about a non-ADS-B target using a track/file identifier, typically from primary or Mode A/C radar
+     * @return the receiver type
      */
-    void setIcao24(const std::string &icao24);
+    const std::optional<std::string> &getReceiverType() const;
 
     /**
      * Fetch call sign.
-     * Callsign of the vehicle (8 chars). Can be null if no callsign has been received.
+     * The flight name or aircraft registration as 8 chars (2.2.8.2.6)
      * @return the call sign
      */
-    std::optional<std::string> getCallsign() const;
-
-
-    /**
-     * Setter for call sign
-     * @param callsign call sign
-     */
-    void setCallsign(const std::string &callsign);
+    const std::optional<std::string> &getCallsign() const;
 
     /**
-     * Fetch origin country
-     * Country name inferred from the ICAO 24-bit address.
-     * @return the origin country
+     * Fetch the aircraft registration pulled from database
+     * @return the aircraft registration
      */
-    std::string getOriginCountry() const;
+    const std::optional<std::string> &getRegistration() const;
 
     /**
-     * Setter for origin country
-     * @param origin_country origin country
+     * Fetch the aircraft type pulled from database
+     * @return the aircraft type
      */
-    void setOriginCountry(const std::string &origin_country);
+    const std::optional<std::string> &getType() const;
 
     /**
-     * Fetch time position.
-     * Unix timestamp (seconds) for the last position update. Can be null if no position report was received by OpenSky within the past 15s.
-     * @return the time position
+     * Fetch the barometer altitude
+     * the aircraft barometric altitude in feet as a number OR "ground" as a string
+     * @return the barometer altitude
      */
-    std::optional<int> getTimePosition() const;
+    const std::optional<float> &getBaroAltitude() const;
 
     /**
-     * Setter for time position
-     * @param time_position time position
+     * Fetch the geometric altitude
+     * the geometric (GNSS / INS) altitude in feet referenced to the WGS84 ellipsoid
+     * @return the geometric altitude
      */
-    void setTimePosition(int time_position);
+    const std::optional<float> &getGeoAltitude() const;
 
     /**
-     * Fetch last contact
-     * Unix timestamp (seconds) for the last update in general. This field is updated for any new, valid message received from the transponder.
-     * @return the last contact
+     * Fetch the nav altitude
+     * selected altitude from the Mode Control Panel / Flight Control Unit (MCP/FCU) or equivalent equipment
+     * @return the nav altitude
      */
-    int getLastContact() const;
+    const std::optional<float> &getNavAltitude() const;
 
     /**
-     * Setter for last contact
-     * @param last_contact last contact
+     * Fetch the ground speed in knots
+     * @return the ground speed
      */
-    void setLastContact(int last_contact);
+    const std::optional<float> &getGroundSpeed() const;
+
+    /**
+     * Fetch the indicated air speed in knots
+     * @return the indicated air speed
+     */
+    const std::optional<float> &getIndicatedAirspeed() const;
+
+    /**
+     * Fetch the true air speed in knots
+     * @return the true air speed
+     */
+    const std::optional<float> &getTrueAirspeed() const;
+
+    /**
+     * Fetch the outer air temperature
+     * calculated from mach number and true airspeed (typically somewhat inaccurate at lower
+     * altitudes / mach numbers below 0.5, calculation is inhibited for mach < 0.395)
+     * @return the outer air temperature
+     */
+    const std::optional<float> &getOutsideAirTemp() const;
+
+    /**
+     * Fetch the magnetic heading
+     * Heading, degrees clockwise from magnetic north
+     * @return the magnetic heading
+     */
+    const std::optional<float> &getMagTrack() const;
+
+    /**
+     * Fetch the true heading
+     * Heading, degrees clockwise from true north (usually only transmitted on ground,
+     * in the air usually derived from the magnetic heading using magnetic model WMM2020)
+     * @return the true heading
+     */
+    const std::optional<float> &getTrueHeading() const;
+
+    /**
+     * Fetch the transponder Squawk code
+     * Mode A code (Squawk), encoded as 4 octal digits
+     * @return the transponder Squawk code
+     */
+    const std::optional<std::string> &getSquawk() const;
+
+    /**
+     * Fetch the emergency/priority status
+     * ADS-B emergency/priority status, a superset of the 7x00 squawks (2.2.3.2.7.8.1.1)
+     * (none, general, lifeguard, minfuel, nordo, unlawful, downed, reserved)
+     * @return the emergency/priority status
+     */
+    const std::optional<std::string> &getEmergency() const;
+
+    /**
+     * Fetch the emitter category
+     * emitter category to identify particular aircraft or vehicle classes
+     * (values A0 - D7) (2.2.3.2.5.2)
+     * @return the emitter category
+     */
+    const std::optional<std::string> &getCategory() const;
 
     /**
      * Fetch longitude
      * WGS-84 longitude in decimal degrees. Can be null.
      * @return the longitude
      */
-    std::optional<float> getLongitude() const;
-
-    /**
-     * Setter for longitude
-     * @param longitude longitude
-     */
-    void setLongitude(float longitude);
+    const std::optional<float> &getLongitude() const;
 
     /**
      * Fetch latitude
      * WGS-84 latitude in decimal degrees. Can be null.
      * @return the latitude
      */
-    std::optional<float> getLatitude() const;
-
-    /**
-     * Setter for latitude
-     * @param latitude latitude
-     */
-    void setLatitude(float latitude);
-
-    /**
-     * Fetch Barometric altitude.
-     * Barometric altitude in meters. Can be null.
-     * @return the Barometric altitude
-     */
-    std::optional<float> getBaroAltitude() const;
-
-    /**
-     * Setter for Barometric altitude
-     * @param baro_altitude Barometric altitude
-     */
-    void setBaroAltitude(float baro_altitude);
-
-    /**
-     * Fetch on ground status.
-     * Boolean value which indicates if the position was retrieved from a surface position report.
-     * @return the on ground status
-     */
-    bool getOnGround() const;
-
-    /**
-     * Setter for ground status
-     * @param on_ground ground status
-     */
-    void setOnGround(bool on_ground);
-
-    /**
-     * Fetch velocity over ground in m/s. Can be null.
-     * @return the velocity
-     */
-    std::optional<float> getVelocity() const;
-
-    /**
-     * Setter for velocity
-     * @param velocity velocity
-     */
-    void setVelocity(float velocity);
-
-    /**
-     * Fetch true track
-     * True track in decimal degrees clockwise from north (north=0°). Can be null.
-     * @return true track
-     */
-    std::optional<float> getTrueTrack() const;
-
-    /**
-     * Setter for true track
-     * @param true_track true track
-     */
-    void setTrueTrack(float true_track);
-
-    /**
-     * Fetch vertical rate
-     * Vertical rate in m/s. A positive value indicates that the airplane is climbing, a negative value indicates that it descends. Can be null.
-     * @return the vertical rate
-     */
-    std::optional<float> getVerticalRate() const;
-
-    /**
-     * Setter for vertical rate
-     * @param vertical_rate vertical rate
-     */
-    void setVerticalRate(float vertical_rate);
-
-    /**
-     * Fetch geometric altitude.
-     * Geometric altitude in meters. Can be null.
-     * @return the geometric altitude
-     */
-    std::optional<float> getGeoAltitude() const;
-
-    /**
-     * Setter for geometric altitude
-     * @param geo_altitude geometric altitude
-     */
-    void setGeoAltitude(float geo_altitude);
-
-    /**
-     * Fetch the transponder code aka Squawk. Can be null.
-     * @return the transponder code
-     */
-    std::optional<std::string> getSquawk() const;
-
-    /**
-     * Setter for transponder code aka Squawk
-     * @param squawk squawk code
-     */
-    void setSquawk(const std::string &squawk);
-
-    /**
-     * Fetch SPI
-     * Whether flight status indicates special purpose indicator.
-     * @return the SPI
-     */
-    bool getSpi() const;
-
-    /**
-     * Setter for SPI
-     * @param spi SPI
-     */
-    void setSpi(bool spi);
-
-    /**
-     * Fetch the position source
-     * The origin of this state’s position.
-     * 0 = ADS-B
-     * 1 = ASTERI
-     * 2 = MLAT
-     * 3 = FLARM
-     * @return the position source
-     */
-    int getPositionSource() const;
-
-    /**
-     * Setter for position source
-     * @param position_source position source
-     */
-    void setPositionSource(int position_source);
-
-    /**
-     * Fetch the aircraft category
-     * 0 = No information at all
-     * 1 = No ADS-B Emitter Category Information
-     * 2 = Light (< 15500 lbs)
-     * 3 = Small (15500 to 75000 lbs)
-     * 4 = Large (75000 to 300000 lbs)
-     * 5 = High Vortex Large (aircraft such as B-757)
-     * 6 = Heavy (> 300000 lbs)
-     * 7 = High Performance (> 5g acceleration and 400 kts)
-     * 8 = Rotorcraft
-     * 9 = Glider / sailplane
-     * 10 = Lighter-than-air
-     * 11 = Parachutist / Skydiver
-     * 12 = Ultralight / hang-glider / paraglider
-     * 13 = Reserved
-     * 14 = Unmanned Aerial Vehicle
-     * 15 = Space / Trans-atmospheric vehicle
-     * 16 = Surface Vehicle – Emergency Vehicle
-     * 17 = Surface Vehicle – Service Vehicle
-     * 18 = Point Obstacle (includes tethered balloons)
-     * 19 = Cluster Obstacle
-     * 20 = Line Obstacle
-     * @return the the aircraft category
-     */
-    int getCategory() const;
-
-    /**
-     * Setter for aircraft category
-     * @param category the aircraft category
-     */
-    void setCategory(int category);
-
-private:
-    std::string m_icao24;
-    std::optional<std::string> m_callsign;
-    std::string m_origin_country;
-    std::optional<int> m_time_position{};
-    int m_last_contact{};
-    std::optional<float> m_longitude{};
-    std::optional<float> m_latitude{};
-    std::optional<float> m_baro_altitude{};
-    bool m_on_ground{};
-    std::optional<float> m_velocity{};
-    std::optional<float> m_true_track{};
-    std::optional<float> m_vertical_rate{};
-//    web::json::array sensors;
-    std::optional<float> m_geo_altitude{};
-    std::optional<std::string> m_squawk;
-    bool m_spi{};
-    int m_position_source{};
-    int m_category{};
+    const std::optional<float> &getLatitude() const;
 };
 
 #endif //FLIGHT_TRACK_FLIGHTSTATUSEVENT_H

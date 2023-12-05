@@ -116,6 +116,11 @@ private:
 
     void addSingleItem(const MyFlightEvent &event);
 
+    /**
+     * Map maintaining the position of flight status record in the UI
+     */
+    std::map<std::string, int> flight_position;
+
 wxDECLARE_EVENT_TABLE();
 };
 
@@ -172,24 +177,23 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     basicListView->AppendColumn("ID");
     basicListView->AppendColumn("ICAO24");
     basicListView->AppendColumn("Call Sign");
-    basicListView->AppendColumn("Origin Country");
-    basicListView->AppendColumn("Time Position");
-    basicListView->AppendColumn("Last Contact");
+    basicListView->AppendColumn("Receiver Type");
+    basicListView->AppendColumn("Registration");
+    basicListView->AppendColumn("Type");
     basicListView->AppendColumn("Longitude");
     basicListView->AppendColumn("Latitude");
     basicListView->AppendColumn("Barometric altitude");
-    basicListView->AppendColumn("Ground Status");
-    basicListView->AppendColumn("Velocity");
-    basicListView->AppendColumn("True track");
-    basicListView->AppendColumn("Vertical rate");
-    basicListView->AppendColumn("Geometric altitude");
+    basicListView->AppendColumn("Geo altitude");
+    basicListView->AppendColumn("Nav altitude");
+    basicListView->AppendColumn("Ground Speed");
+    basicListView->AppendColumn("Indicated Airspeed");
+    basicListView->AppendColumn("True Airspeed");
+    basicListView->AppendColumn("Outside Air Temp");
+    basicListView->AppendColumn("Mag Track");
+    basicListView->AppendColumn("True Heading");
+    basicListView->AppendColumn("Emergency");
+    basicListView->AppendColumn("Category");
     basicListView->AppendColumn("Squawk Code");
-    basicListView->AppendColumn("SPI");
-    basicListView->AppendColumn("Position source");
-    basicListView->AppendColumn("Aircraft Category");
-//    basicListView->SetColumnWidth(0, 80);
-//    basicListView->SetColumnWidth(1, 120);
-//    basicListView->SetColumnWidth(2, 600);
 
     auto sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -207,9 +211,10 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     });
 }
 
-template<typename T> requires arithmetic<T>
-std::string to_optional_string(const std::optional<T>& val) {
-    if(val.has_value()) {
+template<typename T>
+requires arithmetic<T>
+std::string to_optional_string(const std::optional<T> &val) {
+    if (val.has_value()) {
         return std::to_string(val.value());
     } else
         return "-";
@@ -217,28 +222,35 @@ std::string to_optional_string(const std::optional<T>& val) {
 
 void MyFrame::addSingleItem(const MyFlightEvent &event) {
     int index = basicListView->GetItemCount();
+    if (flight_position.count(event.getIcao24()) != 0) {
+        index = flight_position[event.getIcao24()];
+    } else {
+        flight_position[event.getIcao24()] = index;
+        basicListView->InsertItem(index, std::to_string(index + 1));
+    }
 
-    basicListView->InsertItem(index, std::to_string(index+1));
     basicListView->SetItem(index, 1, event.getIcao24());
     basicListView->SetItem(index, 2, event.getCallsign().value_or("-"));
-    basicListView->SetItem(index, 3, event.getOriginCountry());
-    basicListView->SetItem(index, 4, to_optional_string(event.getTimePosition()));
-    basicListView->SetItem(index, 5, std::to_string(event.getLastContact()));
+    basicListView->SetItem(index, 3, event.getReceiverType().value_or("-"));
+    basicListView->SetItem(index, 4, event.getRegistration().value_or("-"));
+    basicListView->SetItem(index, 5, event.getType().value_or("-"));
     basicListView->SetItem(index, 6, to_optional_string(event.getLongitude()));
     basicListView->SetItem(index, 7, to_optional_string(event.getLatitude()));
     basicListView->SetItem(index, 8, to_optional_string(event.getBaroAltitude()));
-    basicListView->SetItem(index, 9, std::to_string(event.getOnGround()));
-    basicListView->SetItem(index, 10, to_optional_string(event.getVelocity()));
-    basicListView->SetItem(index, 11, to_optional_string(event.getTrueTrack()));
-    basicListView->SetItem(index, 12, to_optional_string(event.getVerticalRate()));
-    basicListView->SetItem(index, 13, to_optional_string(event.getGeoAltitude()));
-    basicListView->SetItem(index, 14, event.getSquawk().value_or("-"));
-    basicListView->SetItem(index, 15, std::to_string(event.getSpi()));
-    basicListView->SetItem(index, 16, std::to_string(event.getPositionSource()));
-    basicListView->SetItem(index, 17, std::to_string(event.getCategory()));
+    basicListView->SetItem(index, 9, to_optional_string(event.getGeoAltitude()));
+    basicListView->SetItem(index, 10, to_optional_string(event.getNavAltitude()));
+    basicListView->SetItem(index, 11, to_optional_string(event.getGroundSpeed()));
+    basicListView->SetItem(index, 12, to_optional_string(event.getIndicatedAirspeed()));
+    basicListView->SetItem(index, 13, to_optional_string(event.getTrueAirspeed()));
+    basicListView->SetItem(index, 14, to_optional_string(event.getOutsideAirTemp()));
+    basicListView->SetItem(index, 15, to_optional_string(event.getMagTrack()));
+    basicListView->SetItem(index, 16, to_optional_string(event.getTrueHeading()));
+    basicListView->SetItem(index, 17, event.getEmergency().value_or("-"));
+    basicListView->SetItem(index, 18, event.getCategory().value_or("-"));
+    basicListView->SetItem(index, 19, event.getSquawk().value_or("-"));
 
     // for sorting using the SortItems method
-    basicListView->SetItemData(index, index+1);
+    basicListView->SetItemData(index, index + 1);
 }
 
 void MyFrame::OnExit(wxCommandEvent &event) {
@@ -263,6 +275,6 @@ void MyFrame::OnFlightEvent(MyFlightEvent &event) {
 }
 
 void MyFrame::onEvent(const FlightStatusEvent &event) {
-    MyFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event , event);
+    MyFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event, event);
     wxPostEvent(this, evt);
 }
