@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['arithmetic_0',['arithmetic',['../conceptarithmetic.html',1,'']]]
+  ['adsblolrestclient_0',['ADSBlolRESTClient',['../classADSBlolRESTClient.html',1,'']]],
+  ['arithmetic_1',['arithmetic',['../conceptarithmetic.html',1,'']]]
 ];
