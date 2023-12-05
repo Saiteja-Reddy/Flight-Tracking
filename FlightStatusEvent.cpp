@@ -6,7 +6,7 @@
 
 FlightStatusEvent::FlightStatusEvent(const FlightStatusEvent &event) {
     m_icao24 = event.getIcao24();
-    m_reciver_type = event.getReciverType();
+    m_receiver_type = event.getReceiverType();
     m_callsign = event.getCallsign();
     m_registration = event.getRegistration();
     m_type = event.getType();
@@ -28,7 +28,7 @@ FlightStatusEvent::FlightStatusEvent(const FlightStatusEvent &event) {
 
 FlightStatusEvent::FlightStatusEvent(web::json::value jvalue) {
     m_icao24 = (!jvalue["hex"].is_null()) ? jvalue["hex"].as_string() : "";
-    m_reciver_type = (!jvalue["type"].is_null()) ? std::make_optional(jvalue["type"].as_string()) : std::nullopt;
+    m_receiver_type = (!jvalue["type"].is_null()) ? std::make_optional(jvalue["type"].as_string()) : std::nullopt;
     m_callsign = (!jvalue["flight"].is_null()) ? std::make_optional(jvalue["flight"].as_string()) : std::nullopt;
     m_registration = (!jvalue["r"].is_null()) ? std::make_optional(jvalue["r"].as_string()) : std::nullopt;
     m_type = (!jvalue["t"].is_null()) ? std::make_optional(jvalue["t"].as_string()) : std::nullopt;
@@ -63,11 +63,11 @@ void FlightStatusEvent::setIcao24(const std::string &mIcao24) {
     m_icao24 = mIcao24;
 }
 
-const std::optional<std::string> &FlightStatusEvent::getReciverType() const {
-    return m_reciver_type;
+const std::optional<std::string> &FlightStatusEvent::getReceiverType() const {
+    return m_receiver_type;
 }
-void FlightStatusEvent::setReciverType(const std::optional<std::string> &mReciverType) {
-    m_reciver_type = mReciverType;
+void FlightStatusEvent::setReceiverType(const std::optional<std::string> &mReceiverType) {
+    m_receiver_type = mReceiverType;
 }
 
 const std::optional<std::string> &FlightStatusEvent::getCallsign() const {

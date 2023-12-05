@@ -39,7 +39,7 @@ public:
 
     friend bool operator==(FlightStatusEvent const &current, FlightStatusEvent const &other) {
         return  current.m_icao24 == other.getIcao24() &&
-                current.m_reciver_type == other.getReciverType() &&
+                current.m_receiver_type == other.getReceiverType() &&
                 current.m_callsign == other.getCallsign() &&
                 current.m_registration == other.getRegistration() &&
                 current.m_type == other.getType() &&
@@ -61,7 +61,7 @@ public:
 
 private:
     std::string m_icao24;
-    std::optional<std::string> m_reciver_type;
+    std::optional<std::string> m_receiver_type;
     std::optional<std::string> m_callsign;
     std::optional<std::string> m_registration;
     std::optional<std::string> m_type;
@@ -84,8 +84,8 @@ public:
     const std::string &getIcao24() const;
     void setIcao24(const std::string &mIcao24);
 
-    const std::optional<std::string> &getReciverType() const;
-    void setReciverType(const std::optional<std::string> &mReciverType);
+    const std::optional<std::string> &getReceiverType() const;
+    void setReceiverType(const std::optional<std::string> &mReceiverType);
 
     const std::optional<std::string> &getCallsign() const;
     void setCallsign(const std::optional<std::string> &mCallsign);

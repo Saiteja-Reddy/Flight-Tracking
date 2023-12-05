@@ -22,7 +22,7 @@ private:
     std::vector<std::string> targets;
     std::map<std::string, FlightStatusEvent> currentStates;
 
-    std::vector<FlightStatusEvent> find_and_update_deltas(std::vector<FlightStatusEvent> all_events);
+    std::vector<FlightStatusEvent> find_and_update_deltas(const std::vector<FlightStatusEvent>& all_events);
 
 public:
     // TODO: A list of flights as input - new constructor
@@ -37,7 +37,7 @@ public:
 
     static void display_json(json::value const &jvalue);
 
-    std::vector<FlightStatusEvent> make_request(http_request request);
+    std::vector<FlightStatusEvent> make_request(const http_request& request);
 
     std::vector<FlightStatusEvent> get_events();
 };

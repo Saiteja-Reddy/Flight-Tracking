@@ -34,10 +34,10 @@ void ADSBlolRESTClient::display_json(json::value const & jvalue)
     std::cout << jvalue.serialize() << std::endl;
 }
 
-std::vector<FlightStatusEvent> ADSBlolRESTClient::find_and_update_deltas(std::vector<FlightStatusEvent> all_events) {
+std::vector<FlightStatusEvent> ADSBlolRESTClient::find_and_update_deltas(const std::vector<FlightStatusEvent>& all_events) {
     std::vector<FlightStatusEvent> updated_events{};
-    for (FlightStatusEvent event : all_events) {
-        std::string icao24 = event.getIcao24();
+    for (const FlightStatusEvent& event : all_events) {
+        const std::string& icao24 = event.getIcao24();
         bool no_change = (currentStates.count(icao24) && event == currentStates[icao24]);
         if (!no_change) {
             currentStates[icao24] = event;
@@ -47,7 +47,7 @@ std::vector<FlightStatusEvent> ADSBlolRESTClient::find_and_update_deltas(std::ve
     return updated_events;
 }
 
-std::vector<FlightStatusEvent> ADSBlolRESTClient::make_request(http_request request) {
+std::vector<FlightStatusEvent> ADSBlolRESTClient::make_request(const http_request& request) {
     std::vector<FlightStatusEvent> all_events{};
     client.request(request)
         .then([this](const http_response& response)
@@ -95,7 +95,7 @@ std::vector<FlightStatusEvent> ADSBlolRESTClient::get_events()
         request.set_request_uri(tmp_builder.to_string());
         all_events = make_request(request);
     } else {
-        for(auto target : targets) {
+        for(const auto& target : targets) {
             tmp_builder = builder;
             tmp_builder.append("/icao/" + target);
             request.set_request_uri(tmp_builder.to_string());
@@ -106,5 +106,4 @@ std::vector<FlightStatusEvent> ADSBlolRESTClient::get_events()
 
     std::vector<FlightStatusEvent> updates = find_and_update_deltas(all_events);
     return updates;
-    return all_events;
 }
