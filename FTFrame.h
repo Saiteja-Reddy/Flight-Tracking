@@ -2,8 +2,8 @@
 // Created by Sai Teja Reddy Moolamalla on 12/5/23.
 //
 
-#ifndef FLIGHT_TRACK_MYFRAME_H
-#define FLIGHT_TRACK_MYFRAME_H
+#ifndef FLIGHT_TRACK_FTFRAME_H
+#define FLIGHT_TRACK_FTFRAME_H
 
 #include <wx/wxprec.h>
 
@@ -16,14 +16,15 @@
 
 #include "FlightStatusEvent.h"
 #include "Observer.h"
-#include "MyFlightEvent.h"
+#include "wxFlightEvent.h"
 
 #include <concepts>
+#include <random>
 
 template<typename T>
 concept arithmetic = std::integral<T> or std::floating_point<T>;
 
-wxDECLARE_EVENT(MY_FLIGHT_EVENT, MyFlightEvent);
+wxDECLARE_EVENT(MY_FLIGHT_EVENT, wxFlightEvent);
 
 enum {
     ID_Hello = 1,
@@ -33,7 +34,7 @@ enum {
 /**
  * UI App frame class, which also observers flight status events to update the UI.
  */
-class MyFrame : public wxFrame, public Observer<FlightStatusEvent> {
+class FTFrame : public wxFrame, public Observer<FlightStatusEvent> {
 public:
     /**
      * Constructor
@@ -41,7 +42,7 @@ public:
      * @param pos position
      * @param size size
      */
-    MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
+    FTFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 
     /**
      * Handles UI updates on receiving a flight status event.
@@ -72,18 +73,24 @@ private:
      * Helper function to process flight event
      * @param event received flight event
      */
-    void OnFlightEvent(MyFlightEvent &event);
+    void OnFlightEvent(wxFlightEvent &event);
 
     wxListView *basicListView;
 
-    void addSingleItem(const MyFlightEvent &event);
+    void addSingleItem(const wxFlightEvent &event, const wxColour &col);
 
     /**
      * Map maintaining the position of flight status record in the UI
      */
     std::map<std::string, int> flight_position;
 
+    /**
+     * Initializing random generator for colors on the UI
+     */
+    std::default_random_engine eng{10};
+    std::uniform_int_distribution<> gencolor{124, 247};
+
 wxDECLARE_EVENT_TABLE();
 };
 
-#endif //FLIGHT_TRACK_MYFRAME_H
+#endif //FLIGHT_TRACK_FTFRAME_H

@@ -19,7 +19,7 @@
 /**
  * Define a new event class to process flight events for the wxFrame UI
  */
-class MyFlightEvent : public wxCommandEvent, public FlightStatusEvent {
+class wxFlightEvent : public wxCommandEvent, public FlightStatusEvent {
 public:
     /**
      * Constructor
@@ -27,14 +27,14 @@ public:
      * @param id the event id
      * @param event the received flight status event to be processed
      */
-    explicit MyFlightEvent(wxEventType commandType, int id, const FlightStatusEvent &event)
+    explicit wxFlightEvent(wxEventType commandType, int id, const FlightStatusEvent &event)
             : wxCommandEvent(commandType, id), FlightStatusEvent(event) {}
 
     /**
      * Copy constructor
      * @param event the event to be copied
      */
-    MyFlightEvent(const MyFlightEvent &event)
+    wxFlightEvent(const wxFlightEvent &event)
             : wxCommandEvent(event), FlightStatusEvent(event) {}
 
     /**
@@ -42,7 +42,7 @@ public:
      * Required by wxPostEvent()
      * @return the cloned copy
      */
-    wxEvent *Clone() const override { return new MyFlightEvent(*this); }
+    wxEvent *Clone() const override { return new wxFlightEvent(*this); }
 };
 
 #endif //FLIGHT_TRACK_MYFLIGHTEVENT_H

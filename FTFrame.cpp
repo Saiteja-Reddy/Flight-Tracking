@@ -2,12 +2,12 @@
 // Created by Sai Teja Reddy Moolamalla on 12/5/23.
 //
 
-#include "MyFrame.h"
+#include "FTFrame.h"
 
-MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
+FTFrame::FTFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
         : wxFrame(nullptr, wxID_ANY, title, pos, size) {
 
-    Bind(MY_FLIGHT_EVENT, &MyFrame::OnFlightEvent, this, ID_Flight_Event);
+    Bind(MY_FLIGHT_EVENT, &FTFrame::OnFlightEvent, this, ID_Flight_Event);
 
     auto *menuFile = new wxMenu;
     menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
@@ -71,13 +71,15 @@ std::string to_optional_string(const std::optional<T> &val) {
         return "-";
 }
 
-void MyFrame::addSingleItem(const MyFlightEvent &event) {
+void FTFrame::addSingleItem(const wxFlightEvent &event, const wxColour &col) {
     int index = basicListView->GetItemCount();
     if (flight_position.count(event.getIcao24()) != 0) {
         index = flight_position[event.getIcao24()];
+        basicListView->SetItemBackgroundColour(index, col); // Update color
     } else {
         flight_position[event.getIcao24()] = index;
         basicListView->InsertItem(index, std::to_string(index + 1));
+        basicListView->SetItemBackgroundColour(index, *wxGREEN); // Set color to green
     }
 
     basicListView->SetItem(index, 1, event.getIcao24());
@@ -104,25 +106,25 @@ void MyFrame::addSingleItem(const MyFlightEvent &event) {
     basicListView->SetItemData(index, index + 1);
 }
 
-void MyFrame::OnExit(wxCommandEvent &event) {
+void FTFrame::OnExit(wxCommandEvent &event) {
     Close(true);
 }
 
-void MyFrame::OnAbout(wxCommandEvent &event) {
+void FTFrame::OnAbout(wxCommandEvent &event) {
     wxMessageBox("This is a wxWidgets' Hello world sample",
                  "About Hello World", wxOK | wxICON_INFORMATION);
 }
 
-void MyFrame::OnHello(wxCommandEvent &event) {
+void FTFrame::OnHello(wxCommandEvent &event) {
     std::cout << "Hello called!" << std::endl;
 }
 
-void MyFrame::OnFlightEvent(MyFlightEvent &event) {
-    std::cout << "Got event in Frame! - " << event.getIcao24() << std::endl;
-    addSingleItem(event);
+void FTFrame::OnFlightEvent(wxFlightEvent &event) {
+    auto col = wxColor(gencolor(eng), gencolor(eng), gencolor(eng));
+    addSingleItem(event, col);
 }
 
-void MyFrame::onEvent(const FlightStatusEvent &event) {
-    MyFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event, event);
+void FTFrame::onEvent(const FlightStatusEvent &event) {
+    wxFlightEvent evt(MY_FLIGHT_EVENT, ID_Flight_Event, event);
     wxPostEvent(this, evt);
 }
