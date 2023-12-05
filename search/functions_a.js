@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['start_0',['start',['../classFlightTracker.html#a58b9a77f104da536d6446f3912fb92f7',1,'FlightTracker::start()'],['../classSeparateThreadObserver.html#ac0230b0aa09244373cb09203827011d9',1,'SeparateThreadObserver::start()']]],
-  ['stop_1',['stop',['../classFlightTracker.html#a8827ff3a66408dda4ef44f877150ddca',1,'FlightTracker::stop()'],['../classSeparateThreadObserver.html#aee30f6f068d70521aade30d193f6a7e9',1,'SeparateThreadObserver::stop()']]]
+  ['uiclient_0',['UIClient',['../classUIClient.html#a71122d17044a913bc092d225b5beebb0',1,'UIClient']]],
+  ['unregisterobserver_1',['unregisterobserver',['../classFlightTracker.html#abf67492f6134d665d1ef0e57735ef612',1,'FlightTracker::unregisterObserver()'],['../classObservable.html#a028f7fa240e5a51dec0c88e2831fd0e7',1,'Observable::unregisterObserver()']]]
 ];

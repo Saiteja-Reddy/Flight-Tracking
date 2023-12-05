@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['onevent_0',['onevent',['../classMyFrame.html#a0f9729d2de872f5dbbdefac429e84df4',1,'MyFrame::onEvent()'],['../classObserver.html#a520600e917591b25c61a50bbc644c25c',1,'Observer::onEvent()'],['../classSeparateThreadObserver.html#a2ff8449bc68737e99cbb48665227218f',1,'SeparateThreadObserver::onEvent()']]],
-  ['oninit_1',['OnInit',['../classMyApp.html#a307eda60ebf119f9b25e9dd07a8ce513',1,'MyApp']]]
+  ['processevent_0',['processevent',['../classDatabaseClient.html#ab599382225bd89e44d4ef1cf91968307',1,'DatabaseClient::processEvent()'],['../classSeparateThreadObserver.html#a5a05a11f98f30232742229b50abf7bf5',1,'SeparateThreadObserver::processEvent()'],['../classUIClient.html#a117d2e6b241114b00c0a331c48ce0d34',1,'UIClient::processEvent()']]]
 ];

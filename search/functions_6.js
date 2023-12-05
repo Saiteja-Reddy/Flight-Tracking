@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['notifyobservers_0',['notifyobservers',['../classFlightTracker.html#aece41ed41583274e24e7efc91f70d784',1,'FlightTracker::notifyObservers()'],['../classObservable.html#a7803928963fddc197c7fa73c67def10d',1,'Observable::notifyObservers()']]]
+  ['onevent_0',['onevent',['../classFTFrame.html#a95d8ce8f93f557bfd68461780990f790',1,'FTFrame::onEvent()'],['../classObserver.html#a520600e917591b25c61a50bbc644c25c',1,'Observer::onEvent()'],['../classSeparateThreadObserver.html#a2ff8449bc68737e99cbb48665227218f',1,'SeparateThreadObserver::onEvent()']]],
+  ['oninit_1',['OnInit',['../classFlightTrackerApp.html#a182c455d8b63128aa2b97f41ec59b98b',1,'FlightTrackerApp']]]
 ];
