@@ -139,7 +139,7 @@ auto uic = std::make_shared<UIClient>();
 bool MyApp::OnInit() {
     auto *frame = new MyFrame("Flight Tracker", wxPoint(50, 50), wxSize(450, 340));
     frame->Show(true);
-    ft.registerObserver(dc);
+//    ft.registerObserver(dc);
     ft.registerObserver(uic);
     ft.registerObserver(std::shared_ptr<MyFrame>(frame));
     dc->start();
@@ -221,21 +221,21 @@ void MyFrame::addSingleItem(const MyFlightEvent &event) {
     basicListView->InsertItem(index, std::to_string(index+1));
     basicListView->SetItem(index, 1, event.getIcao24());
     basicListView->SetItem(index, 2, event.getCallsign().value_or("-"));
-    basicListView->SetItem(index, 3, event.getOriginCountry());
-    basicListView->SetItem(index, 4, to_optional_string(event.getTimePosition()));
-    basicListView->SetItem(index, 5, std::to_string(event.getLastContact()));
-    basicListView->SetItem(index, 6, to_optional_string(event.getLongitude()));
-    basicListView->SetItem(index, 7, to_optional_string(event.getLatitude()));
-    basicListView->SetItem(index, 8, to_optional_string(event.getBaroAltitude()));
-    basicListView->SetItem(index, 9, std::to_string(event.getOnGround()));
-    basicListView->SetItem(index, 10, to_optional_string(event.getVelocity()));
-    basicListView->SetItem(index, 11, to_optional_string(event.getTrueTrack()));
-    basicListView->SetItem(index, 12, to_optional_string(event.getVerticalRate()));
-    basicListView->SetItem(index, 13, to_optional_string(event.getGeoAltitude()));
-    basicListView->SetItem(index, 14, event.getSquawk().value_or("-"));
-    basicListView->SetItem(index, 15, std::to_string(event.getSpi()));
-    basicListView->SetItem(index, 16, std::to_string(event.getPositionSource()));
-    basicListView->SetItem(index, 17, std::to_string(event.getCategory()));
+//    basicListView->SetItem(index, 3, event.getOriginCountry());
+//    basicListView->SetItem(index, 4, to_optional_string(event.getTimePosition()));
+//    basicListView->SetItem(index, 5, std::to_string(event.getLastContact()));
+//    basicListView->SetItem(index, 6, to_optional_string(event.getLongitude()));
+//    basicListView->SetItem(index, 7, to_optional_string(event.getLatitude()));
+//    basicListView->SetItem(index, 8, to_optional_string(event.getBaroAltitude()));
+//    basicListView->SetItem(index, 9, std::to_string(event.getOnGround()));
+//    basicListView->SetItem(index, 10, to_optional_string(event.getVelocity()));
+//    basicListView->SetItem(index, 11, to_optional_string(event.getTrueTrack()));
+//    basicListView->SetItem(index, 12, to_optional_string(event.getVerticalRate()));
+//    basicListView->SetItem(index, 13, to_optional_string(event.getGeoAltitude()));
+//    basicListView->SetItem(index, 14, event.getSquawk().value_or("-"));
+//    basicListView->SetItem(index, 15, std::to_string(event.getSpi()));
+//    basicListView->SetItem(index, 16, std::to_string(event.getPositionSource()));
+//    basicListView->SetItem(index, 17, std::to_string(event.getCategory()));
 
     // for sorting using the SortItems method
     basicListView->SetItemData(index, index+1);
