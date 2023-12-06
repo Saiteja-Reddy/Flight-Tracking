@@ -131,7 +131,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> _main_loop() {</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            sleep(5);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keyword">auto</span> events = rest_client.get_events();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keyword">auto</span> events = rest_client.<a class="code hl_function" href="classADSBlolRESTClient.html#a4f2a0330b27e34765d4527db89d7343d">get_events</a>();</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;event: events) {</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                <a class="code hl_function" href="classFlightTracker.html#aece41ed41583274e24e7efc91f70d784">notifyObservers</a>(event);</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            }</div>
@@ -143,6 +143,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif </span><span class="comment">//FLIGHT_TRACK_FLIGHTTRACKER_H</span></div>
 <div class="ttc" id="aclassADSBlolRESTClient_html"><div class="ttname"><a href="classADSBlolRESTClient.html">ADSBlolRESTClient</a></div><div class="ttdef"><b>Definition</b> ADSBlolRESTClient.h:17</div></div>
+<div class="ttc" id="aclassADSBlolRESTClient_html_a4f2a0330b27e34765d4527db89d7343d"><div class="ttname"><a href="classADSBlolRESTClient.html#a4f2a0330b27e34765d4527db89d7343d">ADSBlolRESTClient::get_events</a></div><div class="ttdeci">std::vector&lt; FlightStatusEvent &gt; get_events()</div><div class="ttdef"><b>Definition</b> ADSBlolRESTClient.cpp:84</div></div>
 <div class="ttc" id="aclassFlightStatusEvent_html"><div class="ttname"><a href="classFlightStatusEvent.html">FlightStatusEvent</a></div><div class="ttdef"><b>Definition</b> FlightStatusEvent.h:15</div></div>
 <div class="ttc" id="aclassFlightTracker_html"><div class="ttname"><a href="classFlightTracker.html">FlightTracker</a></div><div class="ttdef"><b>Definition</b> FlightTracker.h:23</div></div>
 <div class="ttc" id="aclassFlightTracker_html_a58b9a77f104da536d6446f3912fb92f7"><div class="ttname"><a href="classFlightTracker.html#a58b9a77f104da536d6446f3912fb92f7">FlightTracker::start</a></div><div class="ttdeci">void start()</div><div class="ttdef"><b>Definition</b> FlightTracker.h:36</div></div>

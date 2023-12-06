@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7eobservable_0',['~Observable',['../classObservable.html#a4c2f5840e0276f6b210887d2fd2fa17a',1,'Observable']]],
-  ['_7eseparatethreadobserver_1',['~SeparateThreadObserver',['../classSeparateThreadObserver.html#a2044328f46d51014bd230b7868e6db1a',1,'SeparateThreadObserver']]]
+  ['unregisterobserver_0',['unregisterobserver',['../classFlightTracker.html#abf67492f6134d665d1ef0e57735ef612',1,'FlightTracker::unregisterObserver()'],['../classObservable.html#a028f7fa240e5a51dec0c88e2831fd0e7',1,'Observable::unregisterObserver()']]]
 ];

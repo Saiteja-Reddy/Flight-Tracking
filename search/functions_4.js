@@ -1,22 +1,5 @@
 var searchData=
 [
-  ['getbaroaltitude_0',['getBaroAltitude',['../classFlightStatusEvent.html#a06c4780db0d95435a9019492bcbf3251',1,'FlightStatusEvent']]],
-  ['getcallsign_1',['getCallsign',['../classFlightStatusEvent.html#a667bfa86b64f01799d44c670710df944',1,'FlightStatusEvent']]],
-  ['getcategory_2',['getCategory',['../classFlightStatusEvent.html#a21734757c905e13c67f83fa9b7efd033',1,'FlightStatusEvent']]],
-  ['getemergency_3',['getEmergency',['../classFlightStatusEvent.html#a6fb50932a6edab416f078a3472659a81',1,'FlightStatusEvent']]],
-  ['getgeoaltitude_4',['getGeoAltitude',['../classFlightStatusEvent.html#aa70ca55036a566e8cfd8fe5dce52c672',1,'FlightStatusEvent']]],
-  ['getgroundspeed_5',['getGroundSpeed',['../classFlightStatusEvent.html#aecd32ce2aa624283086d218be8d78ec4',1,'FlightStatusEvent']]],
-  ['geticao24_6',['getIcao24',['../classFlightStatusEvent.html#a916a506e767ff40961db117cfee5a050',1,'FlightStatusEvent']]],
-  ['getindicatedairspeed_7',['getIndicatedAirspeed',['../classFlightStatusEvent.html#a2ad8ab808577580ce0e41c26ad4148ad',1,'FlightStatusEvent']]],
-  ['getlatitude_8',['getLatitude',['../classFlightStatusEvent.html#ac94a20e7171ae3379d266572ded397b1',1,'FlightStatusEvent']]],
-  ['getlongitude_9',['getLongitude',['../classFlightStatusEvent.html#aca1cbc04366c336637338fbcc88e9f75',1,'FlightStatusEvent']]],
-  ['getmagtrack_10',['getMagTrack',['../classFlightStatusEvent.html#afcae66e1f94fdbf0c0cceb692ec1a9ac',1,'FlightStatusEvent']]],
-  ['getnavaltitude_11',['getNavAltitude',['../classFlightStatusEvent.html#a17388ca47d6aa2500ab8d2d46f4eaed1',1,'FlightStatusEvent']]],
-  ['getoutsideairtemp_12',['getOutsideAirTemp',['../classFlightStatusEvent.html#a1875981277e54e5938005338504dcc8c',1,'FlightStatusEvent']]],
-  ['getreceivertype_13',['getReceiverType',['../classFlightStatusEvent.html#a0c4d9fa21bcd34ed7c1da58382c4d9d1',1,'FlightStatusEvent']]],
-  ['getregistration_14',['getRegistration',['../classFlightStatusEvent.html#a166b8d574623f9e94683f90239fc47f4',1,'FlightStatusEvent']]],
-  ['getsquawk_15',['getSquawk',['../classFlightStatusEvent.html#a81eb158951f1e1d273d38d2fb1e6c62a',1,'FlightStatusEvent']]],
-  ['gettrueairspeed_16',['getTrueAirspeed',['../classFlightStatusEvent.html#aec1230677eed09b805f337157360f5df',1,'FlightStatusEvent']]],
-  ['gettrueheading_17',['getTrueHeading',['../classFlightStatusEvent.html#ad91d506775ba1e8689a1dcbce9ed6c70',1,'FlightStatusEvent']]],
-  ['gettype_18',['getType',['../classFlightStatusEvent.html#a1b5f8535694f9aaefbf541a04a54a04b',1,'FlightStatusEvent']]]
+  ['flightstatusevent_0',['flightstatusevent',['../classFlightStatusEvent.html#a97c19a0453fb306962e5a202b1e0b902',1,'FlightStatusEvent::FlightStatusEvent(web::json::value jvalue)'],['../classFlightStatusEvent.html#afb385b4cfeb486fd3f1a691d38dd1b96',1,'FlightStatusEvent::FlightStatusEvent()'],['../classFlightStatusEvent.html#a34bef85b42ff0f75da889a69202a7dfd',1,'FlightStatusEvent::FlightStatusEvent(const FlightStatusEvent &amp;event)']]],
+  ['ftframe_1',['FTFrame',['../classFTFrame.html#af69c280ec882d171b1a9f2a27a29e6f9',1,'FTFrame']]]
 ];
