@@ -62,7 +62,6 @@ private:
             sleep(5);
             auto events = rest_client.get_events();
             for (auto &event: events) {
-                std::cout << "Received evt " << event << std::endl;
                 notifyObservers(event);
             }
         }

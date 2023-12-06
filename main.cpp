@@ -1,7 +1,7 @@
 #include <iostream>
 #include "FlightTracker.h"
 #include "DatabaseClient.h"
-#include "UIClient.h"
+#include "DummyStatsCollection.h"
 #include "FTFrame.h"
 
 #include <wx/wxprec.h>
@@ -44,7 +44,7 @@ wxIMPLEMENT_APP(FlightTrackerApp);
 
 FlightTracker ft;
 auto dc = std::make_shared<DatabaseClient>();
-auto uic = std::make_shared<UIClient>();
+auto uic = std::make_shared<DummyStatsCollection>();
 
 bool FlightTrackerApp::OnInit() {
     auto *frame = new FTFrame("Flight Tracker", wxPoint(50, 50), wxSize(450, 340));

@@ -6,7 +6,6 @@
 
 
 void DatabaseClient::processEvent(const FlightStatusEvent &event) {
-    std::cout << "Received database event " << event << std::endl;
     try {
         SQLite::Statement query(db, getSQLUpdateString(event));
         query.exec();

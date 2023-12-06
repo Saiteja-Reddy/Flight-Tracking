@@ -47,7 +47,7 @@ add_executable(flight_track main.cpp
         Observable.h
         FlightTracker.cpp FlightTracker.h
         SafeQueue.h
-        UIClient.cpp UIClient.h
+        DummyStatsCollection.cpp DummyStatsCollection.h
         Observer.h
         FlightStatusEvent.h FlightStatusEvent.cpp
         ADSBlolRESTClient.cpp ADSBlolRESTClient.h
