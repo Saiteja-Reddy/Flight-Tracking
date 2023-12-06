@@ -43,7 +43,7 @@ public:
 
     /**
      * Constructor which takes list of icao24 identifier strings and only returns updates on those flights
-     * @param targets icao24 ids for all aircraft that should be monitored
+     * @param input_targets icao24 ids for all aircraft that should be monitored
      */
     ADSBlolRESTClient(std::vector<std::string>);
 

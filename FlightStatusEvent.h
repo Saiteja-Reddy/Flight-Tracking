@@ -65,20 +65,20 @@ private:
     std::optional<std::string> m_callsign;
     std::optional<std::string> m_registration;
     std::optional<std::string> m_type;
-    std::optional<float> m_baro_altitude{};
-    std::optional<float> m_geo_altitude{};
-    std::optional<float> m_nav_altitude{};
+    std::optional<int> m_baro_altitude{};
+    std::optional<int> m_geo_altitude{};
+    std::optional<int> m_nav_altitude{};
     std::optional<float> m_ground_speed{};
-    std::optional<float> m_indicated_airspeed{};
-    std::optional<float> m_true_airspeed{};
-    std::optional<float> m_outside_air_temp{};
+    std::optional<int> m_indicated_airspeed{};
+    std::optional<int> m_true_airspeed{};
+    std::optional<int> m_outside_air_temp{};
     std::optional<float> m_mag_track{};
     std::optional<float> m_true_heading{};
     std::optional<std::string> m_squawk{};
     std::optional<std::string> m_emergency{};
     std::optional<std::string> m_category{};
-    std::optional<float> m_longitude{};
-    std::optional<float> m_latitude{};
+    std::optional<double> m_longitude{};
+    std::optional<double> m_latitude{};
 
 public:
 
@@ -87,7 +87,7 @@ public:
      * Unique ICAO 24-bit address of the transponder in hex string representation.
      * @return the icao24 code
      */
-    const std::string &getIcao24() const;
+    const std::string getIcao24() const;
 
     /**
      * Fetch receiver type.
@@ -106,65 +106,65 @@ public:
      * - tisb_trackfile: traffic information about a non-ADS-B target using a track/file identifier, typically from primary or Mode A/C radar
      * @return the receiver type
      */
-    const std::optional<std::string> &getReceiverType() const;
+    const std::optional<std::string> getReceiverType() const;
 
     /**
      * Fetch call sign.
      * The flight name or aircraft registration as 8 chars (2.2.8.2.6)
      * @return the call sign
      */
-    const std::optional<std::string> &getCallsign() const;
+    const std::optional<std::string> getCallsign() const;
 
     /**
      * Fetch the aircraft registration pulled from database
      * @return the aircraft registration
      */
-    const std::optional<std::string> &getRegistration() const;
+    const std::optional<std::string> getRegistration() const;
 
     /**
      * Fetch the aircraft type pulled from database
      * @return the aircraft type
      */
-    const std::optional<std::string> &getType() const;
+    const std::optional<std::string> getType() const;
 
     /**
      * Fetch the barometer altitude
      * the aircraft barometric altitude in feet as a number OR "ground" as a string
      * @return the barometer altitude
      */
-    const std::optional<float> &getBaroAltitude() const;
+    const std::optional<int> getBaroAltitude() const;
 
     /**
      * Fetch the geometric altitude
      * the geometric (GNSS / INS) altitude in feet referenced to the WGS84 ellipsoid
      * @return the geometric altitude
      */
-    const std::optional<float> &getGeoAltitude() const;
+    const std::optional<int> getGeoAltitude() const;
 
     /**
      * Fetch the nav altitude
      * selected altitude from the Mode Control Panel / Flight Control Unit (MCP/FCU) or equivalent equipment
      * @return the nav altitude
      */
-    const std::optional<float> &getNavAltitude() const;
+    const std::optional<int> getNavAltitude() const;
 
     /**
      * Fetch the ground speed in knots
      * @return the ground speed
      */
-    const std::optional<float> &getGroundSpeed() const;
+    const std::optional<float> getGroundSpeed() const;
 
     /**
      * Fetch the indicated air speed in knots
      * @return the indicated air speed
      */
-    const std::optional<float> &getIndicatedAirspeed() const;
+    const std::optional<int> getIndicatedAirspeed() const;
 
     /**
      * Fetch the true air speed in knots
      * @return the true air speed
      */
-    const std::optional<float> &getTrueAirspeed() const;
+    const std::optional<int> getTrueAirspeed() const;
 
     /**
      * Fetch the outer air temperature
@@ -172,14 +172,14 @@ public:
      * altitudes / mach numbers below 0.5, calculation is inhibited for mach < 0.395)
      * @return the outer air temperature
      */
-    const std::optional<float> &getOutsideAirTemp() const;
+    const std::optional<int> getOutsideAirTemp() const;
 
     /**
      * Fetch the magnetic heading
      * Heading, degrees clockwise from magnetic north
      * @return the magnetic heading
      */
-    const std::optional<float> &getMagTrack() const;
+    const std::optional<float> getMagTrack() const;
 
     /**
      * Fetch the true heading
@@ -187,14 +187,14 @@ public:
      * in the air usually derived from the magnetic heading using magnetic model WMM2020)
      * @return the true heading
      */
-    const std::optional<float> &getTrueHeading() const;
+    const std::optional<float> getTrueHeading() const;
 
     /**
      * Fetch the transponder Squawk code
      * Mode A code (Squawk), encoded as 4 octal digits
      * @return the transponder Squawk code
      */
-    const std::optional<std::string> &getSquawk() const;
+    const std::optional<std::string> getSquawk() const;
 
     /**
      * Fetch the emergency/priority status
@@ -202,7 +202,7 @@ public:
      * (none, general, lifeguard, minfuel, nordo, unlawful, downed, reserved)
      * @return the emergency/priority status
      */
-    const std::optional<std::string> &getEmergency() const;
+    const std::optional<std::string> getEmergency() const;
 
     /**
      * Fetch the emitter category
@@ -210,21 +210,21 @@ public:
      * (values A0 - D7) (2.2.3.2.5.2)
      * @return the emitter category
      */
-    const std::optional<std::string> &getCategory() const;
+    const std::optional<std::string> getCategory() const;
 
     /**
      * Fetch longitude
      * WGS-84 longitude in decimal degrees. Can be null.
      * @return the longitude
      */
-    const std::optional<float> &getLongitude() const;
+    const std::optional<double> getLongitude() const;
 
     /**
      * Fetch latitude
      * WGS-84 latitude in decimal degrees. Can be null.
      * @return the latitude
      */
-    const std::optional<float> &getLatitude() const;
+    const std::optional<double> getLatitude() const;
 };
 
 #endif //FLIGHT_TRACK_FLIGHTSTATUSEVENT_H

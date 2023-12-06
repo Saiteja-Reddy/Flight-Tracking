@@ -48,7 +48,7 @@ private:
     std::vector<std::shared_ptr<FlightObserver>> observers;
     std::thread thread_;
     ADSBlolRESTClient rest_client = ADSBlolRESTClient();
-//    ADSBlolRESTClient rest_client = ADSBlolRESTClient(std::vector<std::string>{"a837a7"});
+//    ADSBlolRESTClient rest_client = ADSBlolRESTClient(std::vector<std::string>{"a2b416"});
     /*
      * Above is example of querying base on a specific icao num only. Doesn't seem to work with
      * all icaos, but has always worked with this icao for me

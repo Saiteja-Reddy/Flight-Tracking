@@ -32,12 +32,12 @@ FlightStatusEvent::FlightStatusEvent(web::json::value jvalue) {
     m_callsign = (!jvalue["flight"].is_null()) ? std::make_optional(jvalue["flight"].as_string()) : std::nullopt;
     m_registration = (!jvalue["r"].is_null()) ? std::make_optional(jvalue["r"].as_string()) : std::nullopt;
     m_type = (!jvalue["t"].is_null()) ? std::make_optional(jvalue["t"].as_string()) : std::nullopt;
-    m_baro_altitude = (!jvalue["alt_baro"].is_null() && jvalue["alt_baro"].is_double()) ? std::make_optional(jvalue["alt_baro"].as_double())
+    m_baro_altitude = (!jvalue["alt_baro"].is_null() && jvalue["alt_baro"].is_double()) ? std::make_optional(jvalue["alt_baro"].as_integer())
                                                       : std::nullopt;
-    m_geo_altitude = (!jvalue["alt_geom"].is_null()) ? std::make_optional(jvalue["alt_geom"].as_double())
+    m_geo_altitude = (!jvalue["alt_geom"].is_null()) ? std::make_optional(jvalue["alt_geom"].as_integer())
                                                      : std::nullopt;
     m_nav_altitude = (!jvalue["nav_altitude_mcp"].is_null()) ? std::make_optional(
-            jvalue["nav_altitude_mcp"].as_double()) : std::nullopt;
+            jvalue["nav_altitude_mcp"].as_integer()) : std::nullopt;
     m_ground_speed = (!jvalue["gs"].is_null()) ? std::make_optional(jvalue["gs"].as_double()) : std::nullopt;
     m_indicated_airspeed = (!jvalue["ias"].is_null()) ? std::make_optional(jvalue["ias"].as_double()) : std::nullopt;
     m_true_airspeed = (!jvalue["tas"].is_null()) ? std::make_optional(jvalue["tas"].as_double()) : std::nullopt;
@@ -56,78 +56,78 @@ FlightStatusEvent::FlightStatusEvent(web::json::value jvalue) {
 FlightStatusEvent::FlightStatusEvent() {
 }
 
-const std::string &FlightStatusEvent::getIcao24() const {
+const std::string FlightStatusEvent::getIcao24() const {
     return m_icao24;
 }
 
-const std::optional<std::string> &FlightStatusEvent::getReceiverType() const {
+const std::optional<std::string> FlightStatusEvent::getReceiverType() const {
     return m_receiver_type;
 }
 
-const std::optional<std::string> &FlightStatusEvent::getCallsign() const {
+const std::optional<std::string> FlightStatusEvent::getCallsign() const {
     return m_callsign;
 }
 
-const std::optional<std::string> &FlightStatusEvent::getRegistration() const {
+const std::optional<std::string> FlightStatusEvent::getRegistration() const {
     return m_registration;
 }
 
-const std::optional<std::string> &FlightStatusEvent::getType() const {
+const std::optional<std::string> FlightStatusEvent::getType() const {
     return m_type;
 }
 
-const std::optional<float> &FlightStatusEvent::getBaroAltitude() const {
+const std::optional<int> FlightStatusEvent::getBaroAltitude() const {
     return m_baro_altitude;
 }
 
-const std::optional<float> &FlightStatusEvent::getGeoAltitude() const {
+const std::optional<int> FlightStatusEvent::getGeoAltitude() const {
     return m_geo_altitude;
 }
 
-const std::optional<float> &FlightStatusEvent::getNavAltitude() const {
+const std::optional<int> FlightStatusEvent::getNavAltitude() const {
     return m_nav_altitude;
 }
 
-const std::optional<float> &FlightStatusEvent::getGroundSpeed() const {
+const std::optional<float> FlightStatusEvent::getGroundSpeed() const {
     return m_ground_speed;
 }
 
-const std::optional<float> &FlightStatusEvent::getIndicatedAirspeed() const {
+const std::optional<int> FlightStatusEvent::getIndicatedAirspeed() const {
     return m_indicated_airspeed;
 }
 
-const std::optional<float> &FlightStatusEvent::getTrueAirspeed() const {
+const std::optional<int> FlightStatusEvent::getTrueAirspeed() const {
     return m_true_airspeed;
 }
 
-const std::optional<float> &FlightStatusEvent::getOutsideAirTemp() const {
+const std::optional<int> FlightStatusEvent::getOutsideAirTemp() const {
     return m_outside_air_temp;
 }
 
-const std::optional<float> &FlightStatusEvent::getMagTrack() const {
+const std::optional<float> FlightStatusEvent::getMagTrack() const {
     return m_mag_track;
 }
 
-const std::optional<float> &FlightStatusEvent::getTrueHeading() const {
+const std::optional<float> FlightStatusEvent::getTrueHeading() const {
     return m_true_heading;
 }
 
-const std::optional<std::string> &FlightStatusEvent::getSquawk() const {
+const std::optional<std::string> FlightStatusEvent::getSquawk() const {
     return m_squawk;
 }
 
-const std::optional<std::string> &FlightStatusEvent::getEmergency() const {
+const std::optional<std::string> FlightStatusEvent::getEmergency() const {
     return m_emergency;
 }
 
-const std::optional<std::string> &FlightStatusEvent::getCategory() const {
+const std::optional<std::string> FlightStatusEvent::getCategory() const {
     return m_category;
 }
 
-const std::optional<float> &FlightStatusEvent::getLongitude() const {
+const std::optional<double> FlightStatusEvent::getLongitude() const {
     return m_longitude;
 }
 
-const std::optional<float> &FlightStatusEvent::getLatitude() const {
+const std::optional<double> FlightStatusEvent::getLatitude() const {
     return m_latitude;
 }

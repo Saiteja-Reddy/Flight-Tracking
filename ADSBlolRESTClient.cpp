@@ -98,8 +98,10 @@ std::vector<FlightStatusEvent> ADSBlolRESTClient::get_events()
             tmp_builder = builder;
             tmp_builder.append("/icao/" + target);
             request.set_request_uri(tmp_builder.to_string());
-            FlightStatusEvent single_event = make_request(request)[0];
-            all_events.push_back(single_event);
+            std::vector<FlightStatusEvent> events = make_request(request);
+            if(!events.empty()) {
+                all_events.push_back(events[0]);
+            }
         }
     }
 
