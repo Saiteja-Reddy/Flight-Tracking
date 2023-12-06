@@ -57,7 +57,7 @@ FTFrame::FTFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     panel->SetSizerAndFit(sizer);
 
     button->Bind(wxEVT_BUTTON, [this, textView](wxCommandEvent &event) {
-        auto result = wxGetTextFromUser("Enter your flight number", "Name", "John Doe");
+        auto result = wxGetTextFromUser("Enter your flight number", "Call Sign", "EDV4881");
         textView->SetLabel(result);
     });
 }
