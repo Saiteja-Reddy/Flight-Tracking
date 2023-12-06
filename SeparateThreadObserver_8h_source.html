@@ -110,34 +110,33 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classSeparateThreadObserver.html#aee30f6f068d70521aade30d193f6a7e9">   42</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSeparateThreadObserver.html#aee30f6f068d70521aade30d193f6a7e9">stop</a>() {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">//        eventQueue.enqueue(T()); // TODO: Either make Queue accept both int and FlightStatusEvent, or make a FlightStatusEvent with stopping command</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">//        thread_.join();</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        std::terminate();</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    };</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">// TODO: Either make Queue accept both int and FlightStatusEvent, or make a FlightStatusEvent with stopping command</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">//        eventQueue.enqueue(T());</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">//        thread_.join();</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        std::terminate();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    };</div>
 </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classSeparateThreadObserver.html#a2044328f46d51014bd230b7868e6db1a">   51</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classSeparateThreadObserver.html#a2044328f46d51014bd230b7868e6db1a">~SeparateThreadObserver</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classSafeQueue.html">SafeQueue&lt;T&gt;</a> eventQueue;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    std::thread thread_;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> _event_loop() {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keyword">auto</span> evt = eventQueue.<a class="code hl_function" href="classSafeQueue.html#ab94144680d36ace0b2f8e466a5ae7778">dequeue</a>();</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <a class="code hl_function" href="classSeparateThreadObserver.html#a5a05a11f98f30232742229b50abf7bf5">processEvent</a>(evt);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">//            if (processEvent(evt) == -1)</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">//                break;</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    };</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classSeparateThreadObserver.html#a2044328f46d51014bd230b7868e6db1a">   52</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classSeparateThreadObserver.html#a2044328f46d51014bd230b7868e6db1a">~SeparateThreadObserver</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_class" href="classSafeQueue.html">SafeQueue&lt;T&gt;</a> eventQueue;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    std::thread thread_;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> _event_loop() {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keyword">auto</span> evt = eventQueue.<a class="code hl_function" href="classSafeQueue.html#ab94144680d36ace0b2f8e466a5ae7778">dequeue</a>();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <a class="code hl_function" href="classSeparateThreadObserver.html#a5a05a11f98f30232742229b50abf7bf5">processEvent</a>(evt);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    };</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>};</div>
 </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif </span><span class="comment">//FLIGHT_TRACK_SEPARATETHREADOBSERVER_H</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif </span><span class="comment">//FLIGHT_TRACK_SEPARATETHREADOBSERVER_H</span></div>
 <div class="ttc" id="aclassObserver_html"><div class="ttname"><a href="classObserver.html">Observer</a></div><div class="ttdef"><b>Definition</b> Observer.h:13</div></div>
 <div class="ttc" id="aclassSafeQueue_html"><div class="ttname"><a href="classSafeQueue.html">SafeQueue</a></div><div class="ttdef"><b>Definition</b> SafeQueue.h:17</div></div>
-<div class="ttc" id="aclassSafeQueue_html_ab94144680d36ace0b2f8e466a5ae7778"><div class="ttname"><a href="classSafeQueue.html#ab94144680d36ace0b2f8e466a5ae7778">SafeQueue::dequeue</a></div><div class="ttdeci">T dequeue()</div><div class="ttdef"><b>Definition</b> SafeQueue.h:39</div></div>
+<div class="ttc" id="aclassSafeQueue_html_ab94144680d36ace0b2f8e466a5ae7778"><div class="ttname"><a href="classSafeQueue.html#ab94144680d36ace0b2f8e466a5ae7778">SafeQueue::dequeue</a></div><div class="ttdeci">T dequeue()</div><div class="ttdef"><b>Definition</b> SafeQueue.h:38</div></div>
 <div class="ttc" id="aclassSeparateThreadObserver_html"><div class="ttname"><a href="classSeparateThreadObserver.html">SeparateThreadObserver</a></div><div class="ttdef"><b>Definition</b> SeparateThreadObserver.h:19</div></div>
 <div class="ttc" id="aclassSeparateThreadObserver_html_a2044328f46d51014bd230b7868e6db1a"><div class="ttname"><a href="classSeparateThreadObserver.html#a2044328f46d51014bd230b7868e6db1a">SeparateThreadObserver::~SeparateThreadObserver</a></div><div class="ttdeci">virtual ~SeparateThreadObserver()=default</div></div>
 <div class="ttc" id="aclassSeparateThreadObserver_html_a2ff8449bc68737e99cbb48665227218f"><div class="ttname"><a href="classSeparateThreadObserver.html#a2ff8449bc68737e99cbb48665227218f">SeparateThreadObserver::onEvent</a></div><div class="ttdeci">void onEvent(const T &amp;event) override</div><div class="ttdef"><b>Definition</b> SeparateThreadObserver.h:22</div></div>
