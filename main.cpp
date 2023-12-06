@@ -24,7 +24,17 @@ public:
      */
     bool OnInit() override;
 
+    /**
+    * Runs on App Exit
+    * @return error status code
+    */
     int OnExit() override;
+
+private:
+    FlightTracker ft;
+    std::shared_ptr<DatabaseClient> dc = std::make_shared<DatabaseClient>();
+    std::shared_ptr<DummyStatsCollection> uic = std::make_shared<DummyStatsCollection>();
+    std::shared_ptr<FTFrame> frame = std::make_shared<FTFrame>("Flight Tracker", wxPoint(50, 50), wxSize(450, 340));
 };
 
 wxDEFINE_EVENT(MY_FLIGHT_EVENT, wxFlightEvent);
@@ -42,16 +52,11 @@ wxEND_EVENT_TABLE()
 
 wxIMPLEMENT_APP(FlightTrackerApp);
 
-FlightTracker ft;
-auto dc = std::make_shared<DatabaseClient>();
-auto uic = std::make_shared<DummyStatsCollection>();
-
 bool FlightTrackerApp::OnInit() {
-    auto *frame = new FTFrame("Flight Tracker", wxPoint(50, 50), wxSize(450, 340));
     frame->Show(true);
     ft.registerObserver(dc);
     ft.registerObserver(uic);
-    ft.registerObserver(std::shared_ptr<FTFrame>(frame));
+    ft.registerObserver(frame);
     dc->start();
     uic->start();
     ft.start();
