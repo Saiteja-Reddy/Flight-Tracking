@@ -19,26 +19,51 @@ private:
     std::string base_uri;
     uri_builder builder;
     client::http_client client;
+    /**
+     * Keeps track of which specific flights are being monitored (empty = all)
+     */
     std::vector<std::string> targets;
+    /**
+     * Keeps track of last datapoint for each aircraft
+     */
     std::map<std::string, FlightStatusEvent> currentStates;
 
+    /**
+     * Updates currentStates vector with all new data points. Filters out all unchanged Events from return vector
+     * @param all_events All events that are being updated
+     * @return A subset of the all_events input that only includes events that have changed since the last update
+     */
     std::vector<FlightStatusEvent> find_and_update_deltas(const std::vector<FlightStatusEvent>& all_events);
 
 public:
-    // TODO: A list of flights as input - new constructor
-    // TODO: only send changes from the client
-    // TODO: Add docs!
-    // TODO: Use enums/type checks for flight status event params
-    // TODO: API is down? What to demo?? Have an alternative API?
-    // DONE: Getters and setters for FlightStatusEvents
+    /**
+     * Default constructor monitors all flights within 250nm of Columbia University
+     */
     ADSBlolRESTClient();
 
+    /**
+     * Constructor which takes list of icao24 identifier strings and only returns updates on those flights
+     * @param targets icao24 ids for all aircraft that should be monitored
+     */
     ADSBlolRESTClient(std::vector<std::string>);
 
+    /**
+     * Displays a returned web::json::value
+     * @param jvalue a web::json::value to be printed
+     */
     static void display_json(json::value const &jvalue);
 
+    /**
+     * Sends a request for flight events using the given http_request object, error checks, and returns the result
+     * @param request a web::http::http_request object with all required request parameters set (base, query, headers)
+     * @return vector of FlightStatusEvents that was returned from the request
+     */
     std::vector<FlightStatusEvent> make_request(const http_request& request);
 
+    /**
+     * Returns all FlightStatusEvent updates the class is set up to monitor
+     * @return A vector of updated FlightStatusEvents
+     */
     std::vector<FlightStatusEvent> get_events();
 };
 
