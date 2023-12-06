@@ -40,7 +40,8 @@ public:
      * Stops the observer
      */
     void stop() {
-//        eventQueue.enqueue(T()); // TODO: Either make Queue accept both int and FlightStatusEvent, or make a FlightStatusEvent with stopping command
+// TODO: Either make Queue accept both int and FlightStatusEvent, or make a FlightStatusEvent with stopping command
+//        eventQueue.enqueue(T());
 //        thread_.join();
         std::terminate();
     };
@@ -61,8 +62,6 @@ private:
         while (true) {
             auto evt = eventQueue.dequeue();
             processEvent(evt);
-//            if (processEvent(evt) == -1)
-//                break;
         }
     };
 };

@@ -9,7 +9,6 @@
 #include <memory>
 #include "SeparateThreadObserver.h"
 
-// TODO: use concepts here to check for template args type?
 /**
  * Class to notify events to registered observers
  * @tparam T type of event
@@ -18,7 +17,6 @@ template<class T>
 class Observable {
 public:
 
-    // TODO: check the design of passing shared_ptr's?
     /**
      * Register the observer with the observable
      * @param observer The observer to be registered

@@ -30,7 +30,6 @@ public:
         cv.notify_one();
     }
 
-    // TODO: memory check? std::move??
     /**
      * Get the "front"-element, of the queue.
      * If the queue is empty, wait till a element is available.
