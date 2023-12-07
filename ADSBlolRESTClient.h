@@ -14,6 +14,12 @@
 using namespace web;
 using namespace web::http;
 
+/**
+ * REST Client for ADSB.lol API.
+ * ADSB.lol is a flight tracking network that aggregates data from volunteer feeders around the world.
+ * The API docs are available here - https://api.adsb.lol/docs.
+ * By default, all flights within 250nm of Columbia University are monitored.
+ */
 class ADSBlolRESTClient {
 private:
     std::string base_uri;
@@ -33,7 +39,7 @@ private:
      * @param all_events All events that are being updated
      * @return A subset of the all_events input that only includes events that have changed since the last update
      */
-    std::vector<FlightStatusEvent> find_and_update_deltas(const std::vector<FlightStatusEvent>& all_events);
+    std::vector<FlightStatusEvent> find_and_update_deltas(const std::vector<FlightStatusEvent> &all_events);
 
 public:
     /**
@@ -58,7 +64,7 @@ public:
      * @param request a web::http::http_request object with all required request parameters set (base, query, headers)
      * @return vector of FlightStatusEvents that was returned from the request
      */
-    std::vector<FlightStatusEvent> make_request(const http_request& request);
+    std::vector<FlightStatusEvent> make_request(const http_request &request);
 
     /**
      * Returns all FlightStatusEvent updates the class is set up to monitor
