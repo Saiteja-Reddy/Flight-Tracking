@@ -93,33 +93,33 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using namespace </span>web;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">using namespace </span>web::http;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classADSBlolRESTClient.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="classADSBlolRESTClient.html">ADSBlolRESTClient</a> {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::string base_uri;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    uri_builder builder;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    client::http_client client;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    std::vector&lt;std::string&gt; targets;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    std::map&lt;std::string, FlightStatusEvent&gt; currentStates;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    std::vector&lt;FlightStatusEvent&gt; find_and_update_deltas(<span class="keyword">const</span> std::vector&lt;FlightStatusEvent&gt;&amp; all_events);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_function" href="classADSBlolRESTClient.html#aeebf3108a91f44b4ca0a408893406591">ADSBlolRESTClient</a>();</div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classADSBlolRESTClient.html">   23</a></span><span class="keyword">class </span><a class="code hl_class" href="classADSBlolRESTClient.html">ADSBlolRESTClient</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    std::string base_uri;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    uri_builder builder;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    client::http_client client;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    std::vector&lt;std::string&gt; targets;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    std::map&lt;std::string, FlightStatusEvent&gt; currentStates;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    std::vector&lt;FlightStatusEvent&gt; find_and_update_deltas(<span class="keyword">const</span> std::vector&lt;FlightStatusEvent&gt; &amp;all_events);</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_function" href="classADSBlolRESTClient.html#aeebf3108a91f44b4ca0a408893406591">ADSBlolRESTClient</a>(std::vector&lt;std::string&gt;);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_function" href="classADSBlolRESTClient.html#aeebf3108a91f44b4ca0a408893406591">ADSBlolRESTClient</a>();</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classADSBlolRESTClient.html#ad4129b3b2c5864d908af68ec5c994e01">display_json</a>(json::value <span class="keyword">const</span> &amp;jvalue);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_function" href="classADSBlolRESTClient.html#aeebf3108a91f44b4ca0a408893406591">ADSBlolRESTClient</a>(std::vector&lt;std::string&gt;);</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    std::vector&lt;FlightStatusEvent&gt; <a class="code hl_function" href="classADSBlolRESTClient.html#a2f9ec12465e4b343005a7943714f8870">make_request</a>(<span class="keyword">const</span> http_request&amp; request);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    std::vector&lt;FlightStatusEvent&gt; <a class="code hl_function" href="classADSBlolRESTClient.html#a4f2a0330b27e34765d4527db89d7343d">get_events</a>();</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>};</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classADSBlolRESTClient.html#ad4129b3b2c5864d908af68ec5c994e01">display_json</a>(json::value <span class="keyword">const</span> &amp;jvalue);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    std::vector&lt;FlightStatusEvent&gt; <a class="code hl_function" href="classADSBlolRESTClient.html#a2f9ec12465e4b343005a7943714f8870">make_request</a>(<span class="keyword">const</span> http_request &amp;request);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    std::vector&lt;FlightStatusEvent&gt; <a class="code hl_function" href="classADSBlolRESTClient.html#a4f2a0330b27e34765d4527db89d7343d">get_events</a>();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>};</div>
 </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif </span><span class="comment">//FLIGHT_TRACK_ADSBLOLRESTCLIENT_H</span></div>
-<div class="ttc" id="aclassADSBlolRESTClient_html"><div class="ttname"><a href="classADSBlolRESTClient.html">ADSBlolRESTClient</a></div><div class="ttdef"><b>Definition</b> ADSBlolRESTClient.h:17</div></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif </span><span class="comment">//FLIGHT_TRACK_ADSBLOLRESTCLIENT_H</span></div>
+<div class="ttc" id="aclassADSBlolRESTClient_html"><div class="ttname"><a href="classADSBlolRESTClient.html">ADSBlolRESTClient</a></div><div class="ttdef"><b>Definition</b> ADSBlolRESTClient.h:23</div></div>
 <div class="ttc" id="aclassADSBlolRESTClient_html_a2f9ec12465e4b343005a7943714f8870"><div class="ttname"><a href="classADSBlolRESTClient.html#a2f9ec12465e4b343005a7943714f8870">ADSBlolRESTClient::make_request</a></div><div class="ttdeci">std::vector&lt; FlightStatusEvent &gt; make_request(const http_request &amp;request)</div><div class="ttdef"><b>Definition</b> ADSBlolRESTClient.cpp:50</div></div>
 <div class="ttc" id="aclassADSBlolRESTClient_html_a4f2a0330b27e34765d4527db89d7343d"><div class="ttname"><a href="classADSBlolRESTClient.html#a4f2a0330b27e34765d4527db89d7343d">ADSBlolRESTClient::get_events</a></div><div class="ttdeci">std::vector&lt; FlightStatusEvent &gt; get_events()</div><div class="ttdef"><b>Definition</b> ADSBlolRESTClient.cpp:84</div></div>
 <div class="ttc" id="aclassADSBlolRESTClient_html_ad4129b3b2c5864d908af68ec5c994e01"><div class="ttname"><a href="classADSBlolRESTClient.html#ad4129b3b2c5864d908af68ec5c994e01">ADSBlolRESTClient::display_json</a></div><div class="ttdeci">static void display_json(json::value const &amp;jvalue)</div><div class="ttdef"><b>Definition</b> ADSBlolRESTClient.cpp:32</div></div>
