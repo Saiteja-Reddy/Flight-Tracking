@@ -28,6 +28,69 @@ Below are the expected components of our code:
   - Refreshes continuously based on new events/changes from API
   - The initial state of the dashboard is fetched from the database, then it subscribes to the event queue as events are published from the Producer
 
+## Tutorial
+
+This application provides a C++ wrapper around the ADSB flight-tracking API to fetch information of flights around Columbia University quickly. You will be able to interact with the application through an intuitive colorful display interface.  The application pulls live flight information that is published from each aircraft's internal sensors across the ADS-B network, specifically using the open-source adsb.lol project.  Further information regarding the API can be found at:  https://api.adsb.lol/docs.
+
+## Setup
+
+The setup requires support for the following:
+1. Cmake
+2. C++ compiler supporting C++ 20
+
+Packages/Libraries required:
+1. Openssl: development
+2. Cpprestsdk: development
+3. wxWidgets: development
+4. doxygen
+
+For Mac: 
+```
+brew install openssl cpprestsdk wxWidgets doxygen
+```
+
+For Linux: 
+```
+sudo apt-get install libssl-dev libcpprest-dev libwxgtk3.2-dev doxygen
+```
+
+Installation:
+```
+git clone https://github.com/Saiteja-Reddy/Flight-Tracking.git –recurse-submodule
+```
+
+### Run
+
+After installation, the following commands need to be run:
+
+```
+mkdir build
+cd build
+cmake --build .
+./flight_track
+```
+
+This populates flights within 250 nautical miles radius of Columbia University. The below interface appears upon running. It details the information of flight which can be identified by its unique ID and call sign.
+
+![Flight Track UI](img/img1.png "Flight Track UI")
+
+The application updates the flight information every 5 seconds as seen below.
+
+![Flight Track UI - New updates in Green](img/img2.png "Flight Track UI - New updates in Green")
+
+
+- As the application updates, new events are added in bright green towards the bottom.
+- If an existing flight is updated, the color will change from green to another color.
+
+Every refresh, updates and/or adds up to 1000 flight events:
+
+![Flight Track Stats](img/img3.png "Flight Track Stats")
+
+It also populates the SQLite database on the backend with the records in the flights table:
+
+![Flight Track Database Update](img/img3.png "Flight Track Database Update")
+
+
 ## Release Plan/Deliverables
 
 ### Release 0.8
