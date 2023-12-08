@@ -75,6 +75,7 @@ $(function() {
 <div class="textblock"><p><a class="anchor" id="md_README"></a> Team: Dylan Rose, Gargi Patil, Sai Teja Reddy Moolamalla</p>
 <p>Library Documentation: <a href="https://saiteja-reddy.github.io/Flight-Tracking/">https://saiteja-reddy.github.io/Flight-Tracking/</a></p>
 <p><a href="https://drive.google.com/file/d/18v-480bffOkiI2yinfUK0cQXCwYoQPPn/view?usp=sharing">Demo Link</a></p>
+<p><a href="https://docs.google.com/presentation/d/1tdNkIHsNe8axcTRKnMoTIz2ly7YPO44jpYaXMJZki0g/">Slides</a></p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Overview</h1>
 <p>For our project, our goal is to make and use a well-designed C++ wrapper around an existing API to fetch flight-tracking data. We will be designing a wrapper to expose the REST API to C++ programs with an intuitive interface, and then build a display/UI to demo the functionality and potential use cases for our wrapper. We will include a set of tests for the wrapper, documentation, and measurements regarding the effect the wrapper has on request performance.</p>
@@ -131,17 +132,17 @@ Run</h2>
 <div class="line">cmake --build .</div>
 <div class="line">./flight_track</div>
 </div><!-- fragment --><p>This populates flights within 250 nautical miles radius of Columbia University. The below interface appears upon running. It details the information of flight which can be identified by its unique ID and call sign.</p>
-<p><img src="img/img1.png" alt="Flight Track UI" title="Flight Track UI" class="inline"/></p>
+<p><img src="img1.png" alt="Flight Track UI" title="Flight Track UI" class="inline"/></p>
 <p>The application updates the flight information every 5 seconds as seen below.</p>
-<p><img src="img/img2.png" alt="Flight Track UI - New updates in Green" title="Flight Track UI - New updates in Green" class="inline"/></p>
+<p><img src="img2.png" alt="Flight Track UI - New updates in Green" title="Flight Track UI - New updates in Green" class="inline"/></p>
 <ul>
 <li>As the application updates, new events are added in bright green towards the bottom.</li>
 <li>If an existing flight is updated, the color will change from green to another color.</li>
 </ul>
 <p>Every refresh, updates and/or adds up to 1000 flight events:</p>
-<p><img src="img/img3.png" alt="Flight Track Stats" title="Flight Track Stats" class="inline"/></p>
+<p><img src="img3.png" alt="Flight Track Stats" title="Flight Track Stats" class="inline"/></p>
 <p>It also populates the SQLite database on the backend with the records in the flights table:</p>
-<p><img src="img/img3.png" alt="Flight Track Database Update" title="Flight Track Database Update" class="inline"/></p>
+<p><img src="img3.png" alt="Flight Track Database Update" title="Flight Track Database Update" class="inline"/></p>
 <h1><a class="anchor" id="autotoc_md8"></a>
 Release Plan/Deliverables</h1>
 <h2><a class="anchor" id="autotoc_md9"></a>
