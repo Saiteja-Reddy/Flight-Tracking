@@ -1,18 +1,27 @@
 var indexSectionsWithContent =
 {
-  0: "0128cdfmoprtu",
-  1: "ft"
+  0: "0128acdefgmnoprstuw~",
+  1: "adfosw",
+  2: "acdefgmnoprsuw~",
+  3: "ft",
+  4: "a"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "pages"
+  1: "classes",
+  2: "functions",
+  3: "pages",
+  4: "concepts"
 };
 
 var indexSectionLabels =
 {
   0: "All",
-  1: "Pages"
+  1: "Classes",
+  2: "Functions",
+  3: "Pages",
+  4: "Concepts"
 };
 

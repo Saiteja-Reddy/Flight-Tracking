@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['release_200_208_0',['Release 0.8',['../index.html#autotoc_md6',1,'']]],
-  ['release_201_200_1',['Release 1.0',['../index.html#autotoc_md7',1,'']]],
-  ['release_201_202_2',['Release 1.2',['../index.html#autotoc_md8',1,'']]],
-  ['release_20plan_20deliverables_3',['Release Plan/Deliverables',['../index.html#autotoc_md5',1,'']]]
+  ['make_5frequest_0',['make_request',['../classADSBlolRESTClient.html#a2f9ec12465e4b343005a7943714f8870',1,'ADSBlolRESTClient']]],
+  ['measurables_1',['Measurables',['../index.html#autotoc_md10',1,'']]]
 ];
