@@ -14,7 +14,7 @@ For our project, our goal is to make and use a well-designed C++ wrapper around 
 Below are the expected components of our code: 
 ### Producer component
 - Fetches, stores, and publishes flight data from REST API
-- The data source is OpenSky REST API: https://openskynetwork.github.io/opensky-api
+- The data source is ADSB.lol API: (https://api.adsb.lol/docs)
 - Wraps REST API with C++ native classes and functionality
 - Periodically polls for changes and publishes the data collected to an event/message queue.
 
