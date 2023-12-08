@@ -74,23 +74,22 @@ cmake --build .
 
 This populates flights within 250 nautical miles radius of Columbia University. The below interface appears upon running. It details the information of flight which can be identified by its unique ID and call sign.
 
-![Flight Track UI](imgs/img1.png)
+<img src="imgs/img1.png" alt="Flight Track UI" style="max-width:90%;"/>
 
 The application updates the flight information every 5 seconds as seen below.
 
-![Flight Track UI - New updates in Green](imgs/img2.png)
-
+<img src="imgs/img2.png" alt="Flight Track UI - New updates in Green" style="max-width:90%;"/>
 
 - As the application updates, new events are added in bright green towards the bottom.
 - If an existing flight is updated, the color will change from green to another color.
 
 Every refresh, updates and/or adds up to 1000 flight events:
 
-![Flight Track Stats](imgs/img3.png)
+<img src="imgs/img3.png" alt="Flight Track Stats" style="max-width:90%;"/>
 
 It also populates the SQLite database on the backend with the records in the flights table:
 
-![Flight Track Database Update](imgs/img3.png)
+<img src="imgs/img4.png" alt="Flight Track Database Update" style="max-width:90%;"/>
 
 
 ## Release Plan/Deliverables
