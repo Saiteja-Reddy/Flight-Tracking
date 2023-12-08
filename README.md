@@ -6,6 +6,8 @@ Library Documentation: https://saiteja-reddy.github.io/Flight-Tracking/
 
 [Demo Link](https://drive.google.com/file/d/18v-480bffOkiI2yinfUK0cQXCwYoQPPn/view?usp=sharing)
 
+[Slides](https://docs.google.com/presentation/d/1tdNkIHsNe8axcTRKnMoTIz2ly7YPO44jpYaXMJZki0g/)
+
 ## Overview
 For our project, our goal is to make and use a well-designed C++ wrapper around an existing API to fetch flight-tracking data. We will be designing a wrapper to expose the REST API to C++ programs with an intuitive interface, and then build a display/UI to demo the functionality and potential use cases for our wrapper. We will include a set of tests for the wrapper, documentation, and measurements regarding the effect the wrapper has on request performance. 
 
@@ -72,11 +74,11 @@ cmake --build .
 
 This populates flights within 250 nautical miles radius of Columbia University. The below interface appears upon running. It details the information of flight which can be identified by its unique ID and call sign.
 
-![Flight Track UI](img/img1.png "Flight Track UI")
+![Flight Track UI](img1.png "Flight Track UI")
 
 The application updates the flight information every 5 seconds as seen below.
 
-![Flight Track UI - New updates in Green](img/img2.png "Flight Track UI - New updates in Green")
+![Flight Track UI - New updates in Green](img2.png "Flight Track UI - New updates in Green")
 
 
 - As the application updates, new events are added in bright green towards the bottom.
@@ -84,11 +86,11 @@ The application updates the flight information every 5 seconds as seen below.
 
 Every refresh, updates and/or adds up to 1000 flight events:
 
-![Flight Track Stats](img/img3.png "Flight Track Stats")
+![Flight Track Stats](img3.png "Flight Track Stats")
 
 It also populates the SQLite database on the backend with the records in the flights table:
 
-![Flight Track Database Update](img/img3.png "Flight Track Database Update")
+![Flight Track Database Update](img3.png "Flight Track Database Update")
 
 
 ## Release Plan/Deliverables
