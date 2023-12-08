@@ -106,34 +106,71 @@ UI/Display component</h2>
 </li>
 </ul>
 <h1><a class="anchor" id="autotoc_md5"></a>
+Tutorial</h1>
+<p>This application provides a C++ wrapper around the ADSB flight-tracking API to fetch information of flights around Columbia University quickly. You will be able to interact with the application through an intuitive colorful display interface. The application pulls live flight information that is published from each aircraft's internal sensors across the ADS-B network, specifically using the open-source adsb.lol project. Further information regarding the API can be found at: <a href="https://api.adsb.lol/docs">https://api.adsb.lol/docs</a>.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Setup</h1>
+<p>The setup requires support for the following:</p><ol type="1">
+<li>Cmake</li>
+<li>C++ compiler supporting C++ 20</li>
+</ol>
+<p>Packages/Libraries required:</p><ol type="1">
+<li>Openssl: development</li>
+<li>Cpprestsdk: development</li>
+<li>wxWidgets: development</li>
+<li>doxygen</li>
+</ol>
+<p>For Mac: </p><div class="fragment"><div class="line">brew install openssl cpprestsdk wxWidgets doxygen</div>
+</div><!-- fragment --><p>For Linux: </p><div class="fragment"><div class="line">sudo apt-get install libssl-dev libcpprest-dev libwxgtk3.2-dev doxygen</div>
+</div><!-- fragment --><p>Installation: </p><div class="fragment"><div class="line">git clone https://github.com/Saiteja-Reddy/Flight-Tracking.git –recurse-submodule</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+Run</h2>
+<p>After installation, the following commands need to be run:</p>
+<div class="fragment"><div class="line">mkdir build</div>
+<div class="line">cd build</div>
+<div class="line">cmake --build .</div>
+<div class="line">./flight_track</div>
+</div><!-- fragment --><p>This populates flights within 250 nautical miles radius of Columbia University. The below interface appears upon running. It details the information of flight which can be identified by its unique ID and call sign.</p>
+<p><img src="img/img1.png" alt="Flight Track UI" title="Flight Track UI" class="inline"/></p>
+<p>The application updates the flight information every 5 seconds as seen below.</p>
+<p><img src="img/img2.png" alt="Flight Track UI - New updates in Green" title="Flight Track UI - New updates in Green" class="inline"/></p>
+<ul>
+<li>As the application updates, new events are added in bright green towards the bottom.</li>
+<li>If an existing flight is updated, the color will change from green to another color.</li>
+</ul>
+<p>Every refresh, updates and/or adds up to 1000 flight events:</p>
+<p><img src="img/img3.png" alt="Flight Track Stats" title="Flight Track Stats" class="inline"/></p>
+<p>It also populates the SQLite database on the backend with the records in the flights table:</p>
+<p><img src="img/img3.png" alt="Flight Track Database Update" title="Flight Track Database Update" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Release Plan/Deliverables</h1>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Release 0.8</h2>
 <ul>
 <li>Producer - C++ interface to the REST API, publish events to an event queue.</li>
 <li>Consumer - generic consumer component with a custom implementation for database updates.</li>
 <li>Tutorial, documentation, tests.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 Release 1.0</h2>
 <ul>
 <li>Enhanced UI/Display component with an intuitive design.</li>
 <li>Consumer - custom implementation of consumer for UI/display updates.</li>
 <li>Basic display component showing real-time events.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 Release 1.2</h2>
 <ul>
 <li>Supporting a map view of the flights with m_latitude/m_longitude information of the flights.</li>
 <li>Functionality to add an always-running VM to log flight history internally for specific flights for potential users.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 Testing</h2>
 <ul>
 <li>Unit tests - for the C++ client, publishing events, database updates, and display updates.</li>
 <li>Integration test - Publishing few sample events on the queue and making sure it’s updated on the database and display (end-to-end).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Measurables</h2>
 <ul>
 <li>Currently, no baseline in C++ exists for such an app. We plan to measure the time added due to the wrapper and downstream compute.</li>
