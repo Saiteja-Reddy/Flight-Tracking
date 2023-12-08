@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Flight Tracker: Main Page</title>
+<title>Flight Tracker: Flight-Tracking</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,10 +68,78 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Flight Tracker Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Flight-Tracking </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> Team: Dylan Rose, Gargi Patil, Sai Teja Reddy Moolamalla</p>
+<p>Library Documentation: <a href="https://saiteja-reddy.github.io/Flight-Tracking/">https://saiteja-reddy.github.io/Flight-Tracking/</a></p>
+<p><a href="https://drive.google.com/file/d/18v-480bffOkiI2yinfUK0cQXCwYoQPPn/view?usp=sharing">Demo Link</a></p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Overview</h1>
+<p>For our project, our goal is to make and use a well-designed C++ wrapper around an existing API to fetch flight-tracking data. We will be designing a wrapper to expose the REST API to C++ programs with an intuitive interface, and then build a display/UI to demo the functionality and potential use cases for our wrapper. We will include a set of tests for the wrapper, documentation, and measurements regarding the effect the wrapper has on request performance.</p>
+<p>Below are the expected components of our code: </p>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Producer component</h2>
+<ul>
+<li>Fetches, stores, and publishes flight data from REST API</li>
+<li>The data source is OpenSky REST API: <a href="https://openskynetwork.github.io/opensky-api">https://openskynetwork.github.io/opensky-api</a></li>
+<li>Wraps REST API with C++ native classes and functionality</li>
+<li>Periodically polls for changes and publishes the data collected to an event/message queue.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Consumer component</h2>
+<ul>
+<li>Subscribes to the event queue to which the Producer publishes.</li>
+<li>Below are the two dedicated consumer functionalities we’d be implementing as part of this project:</li>
+<li>Writing the latest data to a database (potentially, SQLite)</li>
+<li>Updating display/UI with new flight information</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md4"></a>
+UI/Display component</h2>
+<ul>
+<li>Flight status dashboard<ul>
+<li>Take input of flight numbers, tracker IDs, or tail numbers.</li>
+<li>Refreshes continuously based on new events/changes from API</li>
+<li>The initial state of the dashboard is fetched from the database, then it subscribes to the event queue as events are published from the Producer</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Release Plan/Deliverables</h1>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Release 0.8</h2>
+<ul>
+<li>Producer - C++ interface to the REST API, publish events to an event queue.</li>
+<li>Consumer - generic consumer component with a custom implementation for database updates.</li>
+<li>Tutorial, documentation, tests.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Release 1.0</h2>
+<ul>
+<li>Enhanced UI/Display component with an intuitive design.</li>
+<li>Consumer - custom implementation of consumer for UI/display updates.</li>
+<li>Basic display component showing real-time events.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Release 1.2</h2>
+<ul>
+<li>Supporting a map view of the flights with m_latitude/m_longitude information of the flights.</li>
+<li>Functionality to add an always-running VM to log flight history internally for specific flights for potential users.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Testing</h2>
+<ul>
+<li>Unit tests - for the C++ client, publishing events, database updates, and display updates.</li>
+<li>Integration test - Publishing few sample events on the queue and making sure it’s updated on the database and display (end-to-end).</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md10"></a>
+Measurables</h2>
+<ul>
+<li>Currently, no baseline in C++ exists for such an app. We plan to measure the time added due to the wrapper and downstream compute.</li>
+<li>We also plan to stress test the application with an influx of events. </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
